@@ -2,9 +2,10 @@
 <html xmlns:th="https://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
-    <title>Hello World</title>
+    <title>Witaj</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+    <h1>Witaj! <span th:text="${userLogin}"></span></h1>
+    <h1 th:text="${userDane.imie}"> </h1><h1 th:text="${userDane.nazwisko}"></h1>
 </body>
 </html>
