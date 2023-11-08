@@ -1,5 +1,5 @@
-CREATE TABLE `dane_users` (
-  `dane_users_id` integer,
+CREATE TABLE `dane_user` (
+  `dane_user_id` integer PRIMARY KEY,
   `imie` varchar(255),
   `nazwisko` varchar(255),
   `nr_telefonu` integer,
@@ -10,67 +10,67 @@ CREATE TABLE `dane_users` (
   `email` varchar(255)
 );
 
-CREATE TABLE `users` (
-  `id` integer PRIMARY KEY,
+CREATE TABLE `user` (
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `login` varchar(255),
   `haslo` varchar(255),
-  `dane_users_id` integer
+  `dane_user_id` integer UNIQUE
 );
 
-CREATE TABLE `ogloszenia` (
-  `id` integer PRIMARY KEY,
+CREATE TABLE `ogloszenie` (
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `tytul` varchar(255),
   `opis` text COMMENT 'opis ogloszenia',
-  `user_id` integer,
-  `id_modelu` integer,
+  `user_id` integer UNIQUE,
+  `id_modelu` integer UNIQUE,
   `rok_produkcji_samochodu` integer,
   `producent` varchar(255),
   `cena` integer,
   `ilosc` integer
 );
 
-CREATE TABLE `zdjecia` (
-  `id` integer PRIMARY KEY,
-  `zdjecie` filestream,
-  `id_ogloszenia` integer
+CREATE TABLE `zdjecie` (
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
+  `zdjecie` mediumblob,
+  `id_ogloszenia` integer UNIQUE
 );
 
-CREATE TABLE `marki` (
+CREATE TABLE `marka` (
   `id` integer PRIMARY KEY,
   `nazwa_marki` varchar(255)
 );
 
-CREATE TABLE `modele` (
+CREATE TABLE `model` (
   `id` integer PRIMARY KEY,
   `nazwa_modelu` varchar(255),
   `generacja` varchar(255),
-  `id_marki` integer
+  `id_marki` integer UNIQUE
 );
 
 CREATE TABLE `koszyk` (
-  `id_user` integer PRIMARY KEY,
-  `id_produkty` integer
+  `id_user` integer UNIQUE,
+  `id_produkty` integer UNIQUE
 );
 
-ALTER TABLE `dane_users` ADD FOREIGN KEY (`dane_users_id`) REFERENCES `users` (`dane_users_id`);
+ALTER TABLE `dane_user` ADD FOREIGN KEY (`dane_user_id`) REFERENCES `user` (`dane_user_id`);
 
-ALTER TABLE `ogloszenia` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+ALTER TABLE `ogloszenie` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
-ALTER TABLE `marki` ADD FOREIGN KEY (`id`) REFERENCES `modele` (`id_marki`);
+ALTER TABLE `marka` ADD FOREIGN KEY (`id`) REFERENCES `model` (`id_marki`);
 
-ALTER TABLE `modele` ADD FOREIGN KEY (`id`) REFERENCES `ogloszenia` (`id_modelu`);
+ALTER TABLE `model` ADD FOREIGN KEY (`id`) REFERENCES `ogloszenie` (`id_modelu`);
 
-ALTER TABLE `zdjecia` ADD FOREIGN KEY (`id_ogloszenia`) REFERENCES `ogloszenia` (`id`);
+ALTER TABLE `zdjecie` ADD FOREIGN KEY (`id_ogloszenia`) REFERENCES `ogloszenie` (`id`);
 
-CREATE TABLE `koszyk_ogloszenia` (
+CREATE TABLE `koszyk_ogloszenie` (
   `koszyk_id_produkty` integer,
-  `ogloszenia_id` integer,
-  PRIMARY KEY (`koszyk_id_produkty`, `ogloszenia_id`)
+  `ogloszenie_id` integer,
+  PRIMARY KEY (`koszyk_id_produkty`, `ogloszenie_id`)
 );
 
-ALTER TABLE `koszyk_ogloszenia` ADD FOREIGN KEY (`koszyk_id_produkty`) REFERENCES `koszyk` (`id_produkty`);
+ALTER TABLE `koszyk_ogloszenie` ADD FOREIGN KEY (`koszyk_id_produkty`) REFERENCES `koszyk` (`id_produkty`);
 
-ALTER TABLE `koszyk_ogloszenia` ADD FOREIGN KEY (`ogloszenia_id`) REFERENCES `ogloszenia` (`id`);
+ALTER TABLE `koszyk_ogloszenie` ADD FOREIGN KEY (`ogloszenie_id`) REFERENCES `ogloszenie` (`id`);
 
 
-ALTER TABLE `users` ADD FOREIGN KEY (`id`) REFERENCES `koszyk` (`id_user`);
+ALTER TABLE `koszyk` ADD FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
