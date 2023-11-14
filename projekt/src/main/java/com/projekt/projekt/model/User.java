@@ -18,6 +18,12 @@ public class User {
     @Column(name = "dane_user_id")
     private Integer daneUserId;
 
+    public User() {
+    }
+    public User(String login, String haslo) {
+        this.login = login;
+        this.haslo = haslo;
+    }
     public Integer getId() {
         return id;
     }

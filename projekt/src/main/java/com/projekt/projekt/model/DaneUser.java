@@ -2,8 +2,6 @@ package com.projekt.projekt.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -11,7 +9,6 @@ import jakarta.persistence.Table;
 @Table(name = "dane_user")
 public class DaneUser {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dane_user_id")
     private Integer daneUserId;
     @Column(name = "imie")
@@ -33,6 +30,28 @@ public class DaneUser {
     public Integer getDaneUserId() {
         return daneUserId;
     }
+
+    
+
+    public DaneUser() {
+        
+    }
+
+
+
+    public DaneUser(Integer daneUserId, String imie, String nazwisko, Integer nrTelefonu, String miasto,
+            String kodPocztowy, String ulica, String nrMieszkania, String email) {
+        this.daneUserId = daneUserId;
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+        this.nrTelefonu = nrTelefonu;
+        this.miasto = miasto;
+        this.kodPocztowy = kodPocztowy;
+        this.ulica = ulica;
+        this.nrMieszkania = nrMieszkania;
+        this.email = email;
+    }
+
     public void setDaneUserId(Integer daneUserId) {
         this.daneUserId = daneUserId;
     }

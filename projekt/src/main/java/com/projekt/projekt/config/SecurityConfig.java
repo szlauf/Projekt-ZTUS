@@ -25,12 +25,12 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth ->
                     auth.requestMatchers("/login").permitAll()
+                        .requestMatchers("/registration").permitAll()
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/img/**").permitAll()
                         .requestMatchers("/vid/**").permitAll()
                         .anyRequest().authenticated()
-            )
-            .formLogin(form -> 
+            ).formLogin(form -> 
                     form.loginPage("/login")
                             .permitAll()
                             .loginProcessingUrl("/process-login") // The URL to submit the login form
