@@ -84,7 +84,7 @@ h3 {
 
 .background-container::before {
   content: "";
-  background: url("img/porsz.jpg") center/cover no-repeat;
+  background: url("/img/porsz.jpg") center/cover no-repeat;
   position: absolute;
   top: 0;
   left: 0;

@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -43,7 +44,7 @@ public class SecurityConfig {
                             .permitAll()
                             .loginProcessingUrl("/process-login") // The URL to submit the login form
                             .failureUrl("/login?error=true") // Redirect to this URL after login failure
-                            .defaultSuccessUrl("/index")
+                            .successHandler(authenticationSuccessHandler())
             )
             .httpBasic(Customizer.withDefaults())
             .addFilterBefore(new CaptchaFilter(recaptchaSecretKey), UsernamePasswordAuthenticationFilter.class)
@@ -53,6 +54,11 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new CustomAuthenticationSuccessHandler();
     }
 
     @Bean
