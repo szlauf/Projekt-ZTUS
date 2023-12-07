@@ -7,3 +7,19 @@ VALUES
 VALUES
   (1, 'Jan', 'Kowalski', 123456789, 'Warszawa', '00-001', 'ul. Prosta', '1A', 'jan.kowalski@example.com'),
   (2, 'Anna', 'Nowak', 987654321, 'Kraków', '30-002', 'ul. Krakowska', '2B', 'anna.nowak@example.com');
+
+
+  -- Populate marka table
+INSERT INTO marka (id, nazwa_marki) VALUES
+(1, 'Toyota'),
+(2, 'Ford'),
+(3, 'Honda');
+
+-- Populate model table
+INSERT INTO model (id, nazwa_modelu, generacja, id_marki) VALUES
+(1, 'Corolla', 'X', 1),
+(2, 'Camry', 'V', 1),
+(3, 'Mustang', 'VI', 2),
+(4, 'Fusion', 'II', 2),
+(5, 'Civic', 'X', 3),
+(6, 'Accord', 'X', 3);

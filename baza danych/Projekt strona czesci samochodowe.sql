@@ -22,7 +22,7 @@ CREATE TABLE `ogloszenie` (
   `tytul` varchar(255),
   `opis` text COMMENT 'opis ogloszenia',
   `user_id` integer UNIQUE,
-  `id_modelu` integer UNIQUE,
+  `id_modelu` integer,
   `rok_produkcji_samochodu` integer,
   `producent` varchar(255),
   `cena` integer,
@@ -32,7 +32,7 @@ CREATE TABLE `ogloszenie` (
 CREATE TABLE `zdjecie` (
   `id` integer PRIMARY KEY AUTO_INCREMENT,
   `zdjecie` mediumblob,
-  `id_ogloszenia` integer UNIQUE
+  `id_ogloszenia` integer
 );
 
 CREATE TABLE `marka` (
@@ -44,7 +44,7 @@ CREATE TABLE `model` (
   `id` integer PRIMARY KEY,
   `nazwa_modelu` varchar(255),
   `generacja` varchar(255),
-  `id_marki` integer UNIQUE
+  `id_marki` integer
 );
 
 CREATE TABLE `koszyk` (
@@ -56,9 +56,9 @@ ALTER TABLE `dane_user` ADD FOREIGN KEY (`dane_user_id`) REFERENCES `user` (`dan
 
 ALTER TABLE `ogloszenie` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
-ALTER TABLE `marka` ADD FOREIGN KEY (`id`) REFERENCES `model` (`id_marki`);
+ALTER TABLE `model` ADD FOREIGN KEY (`id_marki`) REFERENCES `marka` (`id`);
 
-ALTER TABLE `model` ADD FOREIGN KEY (`id`) REFERENCES `ogloszenie` (`id_modelu`);
+ALTER TABLE `ogloszenie` ADD FOREIGN KEY (`id_modelu`) REFERENCES `model` (`id`);
 
 ALTER TABLE `zdjecie` ADD FOREIGN KEY (`id_ogloszenia`) REFERENCES `ogloszenie` (`id`);
 
