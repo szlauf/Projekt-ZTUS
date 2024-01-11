@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Części Samochodowe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Części Samochodowe</h1>
+        <div id="filters">
+            <select id="filter-price">
+                <option value="">Cena</option>
+                <!-- Opcje cenowe -->
+            </select>
+            <select id="filter-year">
+                <option value="">Rok produkcji</option>
+                <!-- Opcje roku -->
+            </select>
+            <select id="filter-brand">
+                <option value="">Marka</option>
+                <!-- Opcje marek -->
+            </select>
+            <select id="filter-condition">
+                <option value="">Stan</option>
+                <option value="new">Nowy</option>
+                <option value="used">Używany</option>
+            </select>
+            <select id="filter-type">
+                <option value="">Typ</option>
+                <option value="private">Prywatny</option>
+                <option value="company">Firma</option>
+            </select>
+        </div>
+    </header>
+    <table>
+        <thead>
+            <tr>
+                <th>Zdjęcie</th>
+                <th>Nazwa</th>
+                <th>Cena</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <!-- Dane wstawiane przez JavaScript -->
+        </tbody>
+    </table>
+</body>
+</html>
