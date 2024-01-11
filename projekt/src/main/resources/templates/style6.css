@@ -2,6 +2,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    align-items: center;
+    align-items: center;
     background-color: #f4f4f4;
 }
 
@@ -55,3 +57,37 @@ img {
     width: 100px;
     height: auto;
 }
+
+/*a{
+    width: 20px;
+    height: auto;
+    color: rgb(64, 210, 255);
+    border: #333 2px;
+    padding: 2px;
+}
+*/
+#upperSite {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #upperSite nav {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: -1px;
+  }
+  
+  #upperSite nav a {
+    display: block;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    border: 1px solid white;
+  }
+  
+  #upperSite nav a:hover {
+    background-color: rgb(125, 125, 125);
+  }
+  
