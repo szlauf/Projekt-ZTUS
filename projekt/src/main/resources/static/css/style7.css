@@ -1,80 +1,80 @@
 body {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    margin: 0;
-    padding: 0;
-  }
-  
-  header {
-    background-color: #333;
-    color: #fff;
-    padding: 1rem;
-  }
-  
-  header h1 {
-    margin: 0;
-  }
-  
-  main {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 2rem;
-  }
-  
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+}
+
+header h1 {
+  margin: 0;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2rem;
+}
+
+section {
+  flex-basis: calc(33.333% - 2rem);
+  margin: 1rem;
+}
+
+section h2 {
+  border-bottom: 2px solid #333;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+}
+
+form label {
+  margin-bottom: 0.5rem;
+}
+
+form input,
+form textarea {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+
+form button {
+  align-self: flex-end;
+  background-color: #333;
+  border: none;
+  color: #fff;
+  padding: 0.5rem;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+}
+@media (max-width: 768px) {
   section {
-    flex-basis: calc(33.333% - 2rem);
-    margin: 1rem;
+    flex-basis: calc(50% - 2rem);
   }
-  
-  section h2 {
-    border-bottom: 2px solid #333;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
+}
+
+@media (max-width: 480px) {
+  section {
     flex-basis: 100%;
   }
-  
-  form label {
-    margin-bottom: 0.5rem;
-  }
-  
-  form input,
-  form textarea {
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-  }
-  
-  form button {
-    align-self: flex-end;
-    background-color: #333;
-    border: none;
-    color: #fff;
-    padding: 0.5rem;
-  }
-  
-  footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
 }
-  @media (max-width: 768px) {
-    section {
-      flex-basis: calc(50% - 2rem);
-    }
-  }
-  
-  @media (max-width: 480px) {
-    section {
-      flex-basis: 100%;
-    }
-  }

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style7.css" />
+    <title>Kontakt</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="icons">
+        <a href="product-add.html"
+          ><img src="img/plus-icon.png" alt="Icon 1"
+        /></a>
+        <a href="cart.html"
+          ><img src="img/ic-shopping-cart-24px-1@1x.png" alt="Icon 2"
+        /></a>
+        <a href="profile.html"
+          ><img src="img/ic-perm-identity-24px-1@1x.png" alt="Icon 3"
+        /></a>
+      </div>
+    </nav>
+
+    <main>
+     <div class="content-container">
+      <div class="contact-info">
+        <h1>Skontaktuj się z nami!</h1>
+        <section>
+        <h2>Adres firmy</h2>
+        <p>ul. Example 123</p>
+        <p>12-345 Example City</p>
+        <p>Polska</p>
+      </section>
+      <section>
+        <h2>Numer telefonu</h2>
+        <p>+48 123 456 789</p>
+      </section>
+      <section>
+        <h2>Adres e-mail</h2>
+        <p>contact@example.com</p>
+      </section>
+      <section>
+      </div>
+
+      <div class="contact-form">
+        <h1>Formularz Kontaktowy</h1>
+        <form action="send-email.php" method="post">
+        <label for="name">Imię i nazwisko:</label>
+        <input type="text" id="name" name="name" required />
+        <label for="email">Adres e-mail:</label>
+        <input type="email" id="email" name="email" required />
+        <label for="message">Wiadomość:</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          cols="30"
+          required
+        ></textarea>
+        <div class="send">
+          <button class="submit">Wyślij wiadomość</button>
+        </div>
+        
+      </form>
+      </div>
+     </div>
+      
+        
+      </section>
+    </main>
+    <footer>
+      <p>&copy; TurboBay. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+  </body>
+</html>
