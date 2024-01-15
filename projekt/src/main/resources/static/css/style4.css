@@ -84,7 +84,7 @@ h3 {
 
 .background-container::before {
   content: "";
-  background: url("/img/porsz.jpg") center/cover no-repeat;
+  background: url("img/porsz.jpg") center/cover no-repeat;
   position: absolute;
   top: 0;
   left: 0;
@@ -216,16 +216,19 @@ select:hover {
   border: 1px solid #4caf50;
 }
 
-.categories-container {
+.categories-container,
+.sellers-container {
   text-align: center;
-  margin-top: 200px;
+  margin-top: 100px;
 }
 
-.categories-header-container {
-  margin-bottom: 20px;
+.categories-header-container,
+.sellers-header-container {
+  margin-bottom: 10px;
 }
 
-.categories-grid {
+.categories-grid,
+.sellers-grid {
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -239,9 +242,10 @@ select:hover {
   border-radius: 10px 10px 10px 10px;
 }
 
-.categories-header {
+.categories-header,
+.sellers-header {
   font-size: 48px;
-  margin-bottom: 100px;
+  margin-bottom: 10px;
 }
 
 .category a {
@@ -275,6 +279,264 @@ select:hover {
   border: none;
   border-radius: 0px 0px 7px 7px;
   cursor: pointer;
+}
+.content-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #333;
+}
+
+.cart-header {
+  font-size: 60px;
+  color: #333;
+  margin-left: 200px;
+  margin-top: 30px;
+}
+
+.product img {
+  height: 75px;
+  width: 75px;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.products-container {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  border: 1px solid #fff;
+  background-color: #fff;
+  width: 50%;
+  margin-top: 10%;
+}
+
+.product {
+  align-items: left;
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
+  border: 1px solid #4caf50;
+  border-radius: 7px;
+  padding: 20px;
+  margin: 10px 0;
+  margin-left: 20px;
+  height: 100px;
+  width: 75%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.summary {
+  margin-top: 20%;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  width: 25%; /* Zmiana szerokości */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styl dla przycisku zamówienia */
+.order-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.order-button:hover {
+  background-color: #45a049;
+}
+.pcontainer {
+  width: 70%;
+  float: left;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.image-container {
+  margin-left: 40%;
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  border: 1px solid #45a049;
+  border-radius: 10px;
+  height: 500px;
+  width: 50%;
+  margin-bottom: 30px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-container {
+  margin-left: 40%;
+  border: 1px solid #45a049;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  height: 500px;
+  width: 50%;
+  background-color: #fff;
+}
+
+.product-image {
+  margin-top: 5%;
+  height: 350px;
+  width: 350px;
+}
+
+.product-container {
+  margin-bottom: 10px;
+  height: 500px;
+  width: 50%;
+  background-color: #fff;
+}
+.title {
+  font-size: 50px;
+  margin-bottom: 2%;
+}
+.price {
+  font-size: 37.5px;
+  font-weight: bold;
+  margin-bottom: 5%;
+}
+.product-info {
+  margin-top: 3%;
+  margin-left: 5%;
+  margin-right: 5%;
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+.product-description h3 {
+  font-size: 28px;
+  color: black;
+}
+
+.product-description {
+  font-size: 21px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.product-description {
+  margin-bottom: 10px;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  margin-left: 40%;
+}
+.add-to-cart-btn {
+  background-color: #45a049;
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  height: 100px;
+  width: 500px;
+}
+
+.seller-info {
+  background-color: #fff;
+  align-items: left;
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  margin-right: 15%;
+  border: 1px solid #45a049;
+  padding: 20px;
+  float: right;
+  width: 15%;
+  height: 1000px;
+  border-radius: 10px;
+}
+
+.seller-info img {
+  height: 50px;
+  width: 50px;
+  margin-right: 10px;
+}
+.sellers-opinion {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 10%;
+  width: 100%;
+  height: 75px;
+  font-size: 20px;
+  border: 1px solid #333;
+}
+.cnt-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.contact-button {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20%;
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+}
+
+.contact-button2 {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #45a040;
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  margin-top: 5%;
+  border: 3px solid #45a050;
+}
+.contact-button3 {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 5%;
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+}
+.contact-button:hover {
+  background-color: #fff;
+  border: 4px solid #45a050;
+  color: #45a050;
+  transform: scale(1.01);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.contact-button2:hover {
+  transform: scale(1.01);
+  border: 4px solid #45a050;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.contact-button3:hover {
+  background-color: #fff;
+  border: 4px solid #45a050;
+  color: #45a050;
+  transform: scale(1.01);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 @media only screen and (max-width: 1920px) {
