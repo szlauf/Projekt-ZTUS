@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Części Samochodowe</title>
+    <link rel="stylesheet" href="style6v2.css">
+</head>
+<body>
+    <header>
+        <h1>Części Samochodowe</h1>
+        <div id="upperSite">
+            <nav>
+                <a href="#">Strona Główna</a>
+                <a href="#">Części Samochodowe</a>
+                <a href="#">Samochody</a>
+                <a href="#">Motocykle</a>
+              </nav>
+
+        </div>
+        <div id="filters">
+            <select id="filter-price">
+                <option value="">Cena</option>
+                <option value="low">Najniższa</option>
+                <option value="high">Najwyższa</option>
+            </select>
+            <select id="filter-year">
+                <option value="">Rok produkcji</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <!-- Add more options as needed -->
+            </select>
+            <select id="filter-brand">
+                <option value="">Marka</option>
+                <option value="bmw">BMW</option>
+                <option value="audi">Audi</option>
+                <option value="mercedes">Mercedes</option>
+                <!-- Add more options as needed -->
+            </select>
+            <select id="filter-condition">
+                <option value="">Stan</option>
+                <option value="new">Nowy</option>
+                <option value="used">Używany</option>
+            </select>
+            <select id="filter-type">
+                <option value="">Typ</option>
+                <option value="private">Prywatny</option>
+                <option value="company">Firma</option>
+            </select>
+        </div>
+    </header>
+    <table>
+        <thead>
+            <tr>
+                <th>Zdjęcie</th>
+                <th>Nazwa</th>
+                <th>Cena</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <!-- Dane wstawiane przez JavaScript -->
+        </tbody>
+    </table>
+    <script src="script6.js"></script>
+</body>
+</html>
