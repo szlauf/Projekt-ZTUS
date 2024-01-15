@@ -104,3 +104,15 @@ body {
   #upperSite nav a:hover {
     background-color: #444;
   }
+
+  
+  footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style7.css">
+  <title>Kontakt</title>
+</head>
+<body>
+  <header>
+    <h1>Kontakt</h1>
+  </header>
+  <main>
+    <section>
+      <h2>Adres firmy</h2>
+      <p>ul. Example 123</p>
+      <p>12-345 Example City</p>
+      <p>Polska</p>
+    </section>
+    <section>
+      <h2>Numer telefonu</h2>
+      <p>+48 123 456 789</p>
+    </section>
+    <section>
+      <h2>Adres e-mail</h2>
+      <p>contact@example.com</p>
+    </section>
+    <section>
+      <h2>Formularz kontaktowy</h2>
+      <form action="send-email.php" method="post">
+        <label for="name">Imię i nazwisko:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Adres e-mail:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="message">Wiadomość:</label>
+        <textarea id="message" name="message" rows="5" cols="30" required></textarea>
+        <button type="submit">Wyślij wiadomość</button>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2023 Example Company. Wszelkie prawa zastrzeżone.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodaj ogłoszenie - Części Samochodowe</title>
+    <link rel="stylesheet" href="style8.css">
+</head>
+<body>
+    <header>
+        <h1>Dodaj ogłoszenie - Części Samochodowe</h1>
+    </header>
+
+    <main>
+        <form action="https://example.com/api/add-ad" method="post" enctype="multipart/form-data">
+            <label for="title">Nazwa ogłoszenia:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="image">Zdjęcie:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+
+            <label for="description">Opis:</label>
+            <textarea id="description" name="description" rows="4" cols="50" required></textarea>
+
+            <input type="submit" value="Dodaj ogłoszenie">
+        </form>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 Example Company. Wszelkie prawa zastrzeżone.</p>
+      </footer>
+</body>
+
+</html>
