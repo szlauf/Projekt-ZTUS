@@ -16,4 +16,14 @@ public class PartsService {
     public List<Part> getAllParts() {
         return partsRepository.findAll();
     }
+
+    /*
+     public List<Part> getFilteredParts(String brand, String model, String year, String productionYear) {
+    // Implement the logic to fetch filtered parts from the repository
+    // You can use the JpaRepository methods for this purpose.
+    // Example: partsRepository.findByBrandAndModelAndYearAndProductionYear(brand, model, year, productionYear);
+    // Adjust the method and query according to your data model.
+    }
+
+     */
 }

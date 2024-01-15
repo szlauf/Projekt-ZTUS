@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Części Samochodowe</title>
     <link rel="stylesheet" href="style6.css">
 </head>
+
 <body>
     <header>
         <h1>Części Samochodowe</h1>
@@ -15,8 +17,7 @@
                 <a href="#">Części Samochodowe</a>
                 <a href="#">Samochody</a>
                 <a href="#">Motocykle</a>
-              </nav>
-
+            </nav>
         </div>
         <div id="filters">
             <select id="filter-price">
@@ -27,10 +28,19 @@
                 <option value="">Rok produkcji</option>
                 <!-- Opcje roku -->
             </select>
-            <select id="filter-brand">
+            <select id="filter-brand" onchange="updateModels()">
                 <option value="">Marka</option>
-                <!-- Opcje marek -->
+                <option th:each="marka : ${marki}" th:value="${marka.nazwaMarki}" th:text="${marka.nazwaMarki}"></option>
             </select>
+
+            <select class="custom-select" id="model" name="model" onchange="updateGenerations()">
+                <option value="" disabled selected>Wybierz model</option>
+            </select>
+
+            <select class="custom-select" id="generacja" name="generacja" onchange="onFilterChange()">
+                <option value="" disabled selected>Generacja</option>
+            </select>
+
             <select id="filter-condition">
                 <option value="">Stan</option>
                 <option value="new">Nowy</option>
@@ -44,23 +54,117 @@
         </div>
     </header>
     <table>
-        <thead>
+        <thead>generacja
             <tr>
                 <th>Zdjęcie</th>
                 <th>Nazwa</th>
                 <th>Cena</th>
             </tr>
         </thead>
-            <tbody id="table-body">
-                <!-- Thymeleaf each loop to iterate over the parts -->
-                <tr th:each="part : ${parts}">
-                    <td>
-                        <img th:src="'data:image/png;base64,' + ${part.firstImageBase64}" alt="Part Image">
-                    </td>
-                    <td th:text="${part.title}"></td>
-                    <td th:text="${part.price}"></td>
-                </tr>
-            </tbody>
+        <tbody id="table-body">
+            <!-- Thymeleaf each loop to iterate over the parts -->
+            <tr th:each="part : ${parts}">
+                <td>
+                    <img th:src="'data:image/png;base64,' + ${part.firstImageBase64}" alt="Part Image">
+                </td>
+                <td th:text="${part.title}"></td>
+                <td th:text="${part.price}"></td>
+            </tr>
+        </tbody>
     </table>
+
+
+    <script th:inline="javascript">
+
+        function getQueryStringParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        const brandFilter = getQueryStringParameter('brand');
+        const modelFilter = getQueryStringParameter('model');
+        const yearFilter = getQueryStringParameter('year');
+        const productionYearFilter = getQueryStringParameter('production-year');
+
+        if (brandFilter!=""&&brandFilter) {
+            document.getElementById('filter-brand').value = brandFilter;
+            updateModels();
+        }
+
+        if (modelFilter!=""&&modelFilter) {
+            
+            var modelSelect = document.getElementById('model');
+            for (var i = 0; i < modelSelect.options.length; i++) {
+                if (modelSelect.options[i].value === modelFilter) {
+                    modelSelect.selectedIndex = i;
+                    break;
+                }
+            }
+            updateGenerations();
+        }
+
+        if (yearFilter!=""&&yearFilter) {
+            document.getElementById('generacja').value = yearFilter;
+        }
+
+        if (productionYearFilter!=""&&productionYearFilter) {
+            document.getElementById('filter-year').value = productionYearFilter;
+        }
+
+
+
+        function updateGenerations() {
+            var selectedModel = document.getElementById('model').value;
+            var generations = /*[[${models}]]*/ [];
+
+            var generationDropdown = document.getElementById('generacja');
+            generationDropdown.innerHTML = '<option value="" disabled selected>Generacja</option>';
+
+            for (var i = 0; i < generations.length; i++) {
+                if (generations[i].nazwaModelu === selectedModel) {
+                    var option = document.createElement('option');
+                    option.value = generations[i].generacja;
+                    option.text = generations[i].generacja;
+                    generationDropdown.add(option);
+                }
+            }
+        }
+
+        function updateModels() {
+            var selectedBrand = document.getElementById('filter-brand').value;
+            var models = /*[[${models}]]*/ [];
+
+            var modelDropdown = document.getElementById('model');
+            modelDropdown.innerHTML = '<option value="" disabled selected>Wybierz model</option>';
+
+            for (var i = 0; i < models.length; i++) {
+                if (models[i].marka.nazwaMarki === selectedBrand) {
+                    var option = document.createElement('option');
+                    option.value = models[i].nazwaModelu;
+                    option.text = models[i].nazwaModelu;
+                    modelDropdown.add(option);
+                }
+            }
+
+            // After updating models, also update generations
+            updateGenerations();
+        }
+        
+        function onFilterChange() {
+            // Get selected filter values
+            const brand = document.getElementById('filter-brand').value;
+            const model = document.getElementById('model').value;
+            const year = document.getElementById('generacja').value;
+            const productionYear = document.getElementById('filter-year').value;
+
+            // Construct the new URL with filter parameters
+            const newUrl = `/czesci?brand=${brand}&model=${model}&year=${year}&productionYear=${productionYear}`;
+
+            // Redirect to the new URL
+            window.location.href = newUrl;
+        }
+
+    </script>
 </body>
+
 </html>
