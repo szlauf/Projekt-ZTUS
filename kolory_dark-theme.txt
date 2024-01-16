@@ -1,0 +1,25 @@
+odcienie szarosci:
+#353535
+#2a2a2a
+#2c2c2c
+#6f6f6f
+#afafaf
+#837c7c
+#555
+rgb(60, 60, 60)
+rgba(56, 53, 53, 0.5)
+odcienie bieli:
+rgb(187, 187, 187)
+odcienie niebieskiego:
+#3c7878
+#2c4343
+odcienie czerni:
+rgba(0, 0, 0, 0.6)
+rgb(41, 38, 38)
+rgb(10, 10, 10)
+rgba(18, 17, 17, 0.936)
+#1d1d1d
+#1c1c1c
+282626
+odcienie zieleni:
+#135c14
