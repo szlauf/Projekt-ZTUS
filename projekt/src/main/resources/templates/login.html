@@ -4,7 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Strona logowania</title>
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" id="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="/css/styleDarkMode.css"
+      id="darkModeStylesheet"
+      disabled
+    />
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -72,7 +78,10 @@
               />
             </div>
             <div class="input-container">
-              <div class="g-recaptcha" data-sitekey="6LfePBApAAAAAOV_KPaLYYSKJMObuuOlGvVhX_dk"></div>
+              <div
+                class="g-recaptcha"
+                data-sitekey="6LfePBApAAAAAOV_KPaLYYSKJMObuuOlGvVhX_dk"
+              ></div>
             </div>
             <div th:if="${param.error}" class="input-container">
               Niepoprawna nzwa uzytkownika lub/i haslo
@@ -122,5 +131,9 @@
         });
       });
     </script>
+
+    <button id="toggleModeButton">Przełącz motyw</button>
+
+    <script src="/js/darkmode.js"></script>
   </body>
 </html>

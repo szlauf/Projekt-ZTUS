@@ -4,7 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TurboBay</title>
-    <link rel="stylesheet" href="/css/style4.css" />
+    <link rel="stylesheet" href="/css/style4.css" id="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="/css/style4DarkMode.css"
+      id="darkModeStylesheet"
+      disabled
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -40,16 +46,30 @@
             <div class="label-and-select">
               <label for="brand">Marka:</label>
               <div class="select-container">
-                <select class="custom-select" id="brand" name="brand" onchange="updateModels()">
+                <select
+                  class="custom-select"
+                  id="brand"
+                  name="brand"
+                  onchange="updateModels()"
+                >
                   <option value="" disabled selected>Wybierz markę</option>
-                  <option th:each="marka : ${marki}" th:value="${marka.nazwaMarki}" th:text="${marka.nazwaMarki}"></option>
+                  <option
+                    th:each="marka : ${marki}"
+                    th:value="${marka.nazwaMarki}"
+                    th:text="${marka.nazwaMarki}"
+                  ></option>
                 </select>
               </div>
             </div>
             <div class="label-and-select">
               <label for="model">Model:</label>
               <div class="select-container">
-                <select class="custom-select" id="model" name="model" onchange="updateGenerations()">
+                <select
+                  class="custom-select"
+                  id="model"
+                  name="model"
+                  onchange="updateGenerations()"
+                >
                   <option value="" disabled selected>Wybierz model</option>
                 </select>
               </div>
@@ -65,8 +85,14 @@
             <div class="label-and-select">
               <label for="production-year">Rok produkcji:</label>
               <div class="select-container">
-                <select class="custom-select" id="production-year" name="production-year">
-                  <option value="" disabled selected>Wybierz rok produkcji</option>
+                <select
+                  class="custom-select"
+                  id="production-year"
+                  name="production-year"
+                >
+                  <option value="" disabled selected>
+                    Wybierz rok produkcji
+                  </option>
                 </select>
               </div>
             </div>
@@ -75,9 +101,8 @@
             Szukaj
           </button>
         </form>
-        </div>
+      </div>
     </div>
-
 
     <div class="categories-container">
       <div class="categories-header-container">
@@ -145,66 +170,78 @@
 
     <script th:inline="javascript">
       function updateGenerations() {
-          var selectedModel = document.getElementById('model').value;
-          var generations = /*[[${models}]]*/ [];
-  
-          var generationDropdown = document.getElementById('year');
-          generationDropdown.innerHTML = '<option value="" disabled selected>Generacja</option>';
-  
-          for (var i = 0; i < generations.length; i++) {
-              if (generations[i].nazwaModelu === selectedModel) {
-                  var option = document.createElement('option');
-                  option.value = generations[i].generacja;
-                  option.text = generations[i].generacja;
-                  generationDropdown.add(option);
-              }
+        var selectedModel = document.getElementById("model").value;
+        var generations = /*[[${models}]]*/ [];
+
+        var generationDropdown = document.getElementById("year");
+        generationDropdown.innerHTML =
+          '<option value="" disabled selected>Generacja</option>';
+
+        for (var i = 0; i < generations.length; i++) {
+          if (generations[i].nazwaModelu === selectedModel) {
+            var option = document.createElement("option");
+            option.value = generations[i].generacja;
+            option.text = generations[i].generacja;
+            generationDropdown.add(option);
           }
+        }
       }
-  
+
       function updateModels() {
-          var selectedBrand = document.getElementById('brand').value;
-          var models = /*[[${models}]]*/ [];
-  
-          var modelDropdown = document.getElementById('model');
-          modelDropdown.innerHTML = '<option value="" disabled selected>Wybierz model</option>';
-  
-          for (var i = 0; i < models.length; i++) {
-              if (models[i].marka.nazwaMarki === selectedBrand) {
-                  var option = document.createElement('option');
-                  option.value = models[i].nazwaModelu;
-                  option.text = models[i].nazwaModelu;
-                  modelDropdown.add(option);
-              }
+        var selectedBrand = document.getElementById("brand").value;
+        var models = /*[[${models}]]*/ [];
+
+        var modelDropdown = document.getElementById("model");
+        modelDropdown.innerHTML =
+          '<option value="" disabled selected>Wybierz model</option>';
+
+        for (var i = 0; i < models.length; i++) {
+          if (models[i].marka.nazwaMarki === selectedBrand) {
+            var option = document.createElement("option");
+            option.value = models[i].nazwaModelu;
+            option.text = models[i].nazwaModelu;
+            modelDropdown.add(option);
           }
-  
-          // After updating models, also update generations
-          updateGenerations();
+        }
+
+        // After updating models, also update generations
+        updateGenerations();
       }
-  </script>
-  <script th:inline="javascript">
-    function searchCars() {
-      // Get selected filters
-      var selectedBrand = document.getElementById('brand').value;
-      var selectedModel = document.getElementById('model').value;
-      var selectedYear = document.getElementById('year').value;
-      var selectedProductionYear = document.getElementById('production-year').value;
-  
-      // Construct query string
-      var queryString = '';
-      if (selectedBrand) queryString += 'brand=' + encodeURIComponent(selectedBrand) + '&';
-      if (selectedModel) queryString += 'model=' + encodeURIComponent(selectedModel) + '&';
-      if (selectedYear) queryString += 'year=' + encodeURIComponent(selectedYear) + '&';
-      if (selectedProductionYear) queryString += 'production-year=' + encodeURIComponent(selectedProductionYear) + '&';
-  
-      // Remove trailing '&' if present
-      queryString = queryString.replace(/&$/, '');
-  
-      // Redirect to the second page with the query string
-      window.location.href = '/czesci?' + queryString;
-    }
-  
-    // Rest of your script...
-  </script>
-  
+    </script>
+    <script th:inline="javascript">
+      function searchCars() {
+        // Get selected filters
+        var selectedBrand = document.getElementById("brand").value;
+        var selectedModel = document.getElementById("model").value;
+        var selectedYear = document.getElementById("year").value;
+        var selectedProductionYear =
+          document.getElementById("production-year").value;
+
+        // Construct query string
+        var queryString = "";
+        if (selectedBrand)
+          queryString += "brand=" + encodeURIComponent(selectedBrand) + "&";
+        if (selectedModel)
+          queryString += "model=" + encodeURIComponent(selectedModel) + "&";
+        if (selectedYear)
+          queryString += "year=" + encodeURIComponent(selectedYear) + "&";
+        if (selectedProductionYear)
+          queryString +=
+            "production-year=" +
+            encodeURIComponent(selectedProductionYear) +
+            "&";
+
+        // Remove trailing '&' if present
+        queryString = queryString.replace(/&$/, "");
+
+        // Redirect to the second page with the query string
+        window.location.href = "/czesci?" + queryString;
+      }
+
+      // Rest of your script...
+    </script>
+    <button id="toggleModeButton">Przełącz motyw</button>
+
+    <script src="/js/darkmode.js"></script>
   </body>
 </html>
