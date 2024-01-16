@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.projekt.projekt.Utils.ImageUtils;
 import com.projekt.projekt.model.Marka;
@@ -28,6 +29,7 @@ public class PartsController {
     @Autowired
     private ModelRepository modelRepository;
 
+    /*
     @GetMapping("/czesci")
     public String czesci(ModelMap model) {
         List<Part> parts = partsService.getAllParts();
@@ -47,15 +49,15 @@ public class PartsController {
         model.addAttribute("parts", parts);
         return "czesci";
     }
-
-    /*@GetMapping("/czesci")
+    */
+    @GetMapping("/czesci")
     public String czesci(@RequestParam(name = "brand", required = false) String brand,
-                      @RequestParam(name = "model", required = false) String model,
+                      @RequestParam(name = "model", required = false) String smodel,
                       @RequestParam(name = "year", required = false) String year,
                       @RequestParam(name = "productionYear", required = false) String productionYear,
                       ModelMap model) {
 
-    List<Part> parts = partsService.getFilteredParts(brand, model, year, productionYear);
+    List<Part> parts = partsService.getFilteredParts(brand, smodel, year, productionYear);
     List<Marka> marki = markaRepository.findAll();
     List<Model> models = modelRepository.findAll();
     model.addAttribute("marki", marki);
@@ -72,6 +74,6 @@ public class PartsController {
     model.addAttribute("parts", parts);
     return "czesci";
 }
- */
+ 
     
 }
