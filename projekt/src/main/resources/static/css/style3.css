@@ -39,7 +39,7 @@ body {
 }
 
 .icons a:hover {
-  color: #5b7b7a;
+  color: #4caf50;
 }
 
 .icons img {
@@ -106,7 +106,7 @@ body {
 
 @keyframes input-outline {
   to {
-    outline-color: #4a6c6b;
+    outline-color: #4caf50;
     box-shadow: 0 0 5px rgba(74, 108, 107, 0.8);
   }
 }
@@ -118,7 +118,7 @@ body {
 .register-button {
   height: 50px;
   width: 100%;
-  background-color: #5b7b7a;
+  background-color: #4caf50;
   border: 1px solid #707070;
   color: white;
   padding: 10px 20px;
@@ -131,7 +131,7 @@ body {
 }
 
 .register-button:hover {
-  background-color: #4a6c6b;
+  background-color: #4caf50;
   color: white;
   transform: scale(1.01);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
