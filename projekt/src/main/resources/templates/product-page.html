@@ -39,7 +39,10 @@
     <div class="pcontainer">
       <div class="image-container">
         <div class="product-image">
-          <img src="/img/Qiyana.png" alt="" width="100%" height="100%" />
+          <img
+                th:src="'data:image/png;base64,' + ${part.firstImageBase64}"
+                alt="Part Image"
+              />
         </div>
       </div>
       <div class="product-container">

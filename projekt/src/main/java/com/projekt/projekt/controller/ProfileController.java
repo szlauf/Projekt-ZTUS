@@ -56,4 +56,26 @@ public class ProfileController {
         return "profile";
     }
     
+
+    @GetMapping("/profile_eng")
+    public String profileEng(ModelMap model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userRepository.findByLogin(username);
+        DaneUser daneUser = daneUserRepository.findByDaneUserId(user.getDaneUserId());
+        List<Part> parts = partsService.getUserParts(user);
+        List<UserOrders> userOrders = userOrdersRepository.findByIdUser(user.getId());
+        List<Part> orders = new ArrayList<>();
+
+        for (UserOrders userOrder : userOrders) {
+            orders.add(partsService.getUserOrders(userOrder.getIdOgloszenie()));
+        }
+        model.addAttribute("user", user);
+        model.addAttribute("daneUser", daneUser);
+        model.addAttribute("parts", parts);
+        model.addAttribute("orders", orders);
+        // Zwracanie nazwy widoku (szablonu) o nazwie "profile"
+        return "profile_eng";
+    }
+    
 }

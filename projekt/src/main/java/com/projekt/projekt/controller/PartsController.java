@@ -79,6 +79,31 @@ public class PartsController {
     model.addAttribute("parts", parts);
     return "parts-filter";
 }
+
+@GetMapping("/parts-filter_eng")
+    public String czesciEng(@RequestParam(name = "brand", required = false) String brand,
+                        @RequestParam(name = "model", required = false) String smodel,
+                        @RequestParam(name = "generation", required = false) String generation,
+                        @RequestParam(name = "productionYear", required = false) Integer productionYear,
+                        ModelMap model) {
+
+    List<Part> parts = partsService.getFilteredParts(brand, smodel, generation, productionYear);
+    List<Marka> marki = markaRepository.findAll();
+    List<Model> models = modelRepository.findAll();
+    model.addAttribute("marki", marki);
+    model.addAttribute("models", models);
+
+    // Populate images and base64 for the first image
+    parts.forEach(part -> {
+        List<Zdjecie> zdjecia = part.getZdjecia();
+        if (zdjecia != null && !zdjecia.isEmpty()) {
+            part.setBase64Image(ImageUtils.encodeByteArrayToBase64(zdjecia.get(0).getZdjecie()));
+        }
+    });
+
+    model.addAttribute("parts", parts);
+    return "parts-filter_eng";
+}
  
     
 }

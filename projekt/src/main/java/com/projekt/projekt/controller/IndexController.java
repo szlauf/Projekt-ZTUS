@@ -41,5 +41,21 @@ public class IndexController {
         // Zwrócenie nazwy widoku, który zostanie wyrenderowany dla tej ścieżki
         return "index";
     }
+
+    @GetMapping("/index_eng")
+    public String indexEng(ModelMap model) {
+        // Pobranie wszystkich obiektów Marka z repozytorium
+        List<Marka> marki = markaRepository.findAll();
+        
+        // Pobranie wszystkich obiektów Model z repozytorium
+        List<Model> models = modelRepository.findAll();
+
+        // Dodanie obiektów Marka i Model do modelu, który zostanie przekazany do widoku
+        model.addAttribute("marki", marki);
+        model.addAttribute("models", models);
+
+        // Zwrócenie nazwy widoku, który zostanie wyrenderowany dla tej ścieżki
+        return "index_eng";
+    }
     
 }

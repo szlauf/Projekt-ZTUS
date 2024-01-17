@@ -52,33 +52,37 @@
         <div class="section small-section">
           <h2>Moje Zamówienia</h2>
           <div class="orders">
-            <table>
-              <tbody id="order">
-                  <tr th:each="order : ${orders}">
-                      <td>
-                          <img th:src="'data:image/png;base64,' + ${order.firstImageBase64}" alt="Part Image">
-                      </td>
-                      <td th:text="${order.title}"></td>
-                  </tr>
-              </tbody>
-            </table>
+            <div class="table-container">
+              <table class="part-table">
+                <tbody id="order">
+                    <tr th:each="order : ${orders}" th:attr="data-part-id=${order.id}">
+                        <td>
+                            <img th:src="'data:image/png;base64,' + ${order.firstImageBase64}" alt="Part Image">
+                        </td>
+                        <td th:text="${order.title}"></td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
         <div class="section small-section">
           <h2>Moje Ogłoszenia</h2>
           <div class="announcements">
-            <table>
-              <tbody id="announcements">
-                  <!-- Thymeleaf each loop to iterate over the parts -->
-                  <tr th:each="part : ${parts}">
-                      <td>
-                          <img th:src="'data:image/png;base64,' + ${part.firstImageBase64}" alt="Part Image">
-                      </td>
-                      <td th:text="${part.title}"></td>
-                  </tr>
-              </tbody>
-            </table>
+            <div class="table-container">
+              <table class="part-table">
+                <tbody id="announcements">
+                    <!-- Thymeleaf each loop to iterate over the parts -->
+                    <tr th:each="part : ${parts}" th:attr="data-part-id=${part.id}">
+                        <td>
+                            <img th:src="'data:image/png;base64,' + ${part.firstImageBase64}" alt="Part Image">
+                        </td>
+                        <td th:text="${part.title}"></td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -86,7 +90,17 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Dodaj obsługę zdarzeń lub inne funkcje JavaScript, jeśli są potrzebne
+        // Add click event listener to each table row
+        var rows = document.querySelectorAll(".part-table tbody tr");
+        rows.forEach(function (row) {
+          row.addEventListener("click", function () {
+            // Get the part id from the data attribute or any other appropriate way
+            var partId = row.getAttribute("data-part-id");
+
+            // Redirect to the product-page with the part id
+            window.location.href = "/product-page?id=" + partId;
+          });
+        });
       });
     </script>
     <script src="/js/darkmode.js"></script>

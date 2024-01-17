@@ -56,6 +56,34 @@ public class ProductPageController {
         // Zwracanie nazwy widoku "product-page", który zostanie wyrenderowany w wyniku żądania
         return "product-page";
     }
+
+    @GetMapping("/product-page_eng")
+    public String producPageEng(@RequestParam(name = "id", required = true) Integer id,
+                                ModelMap model) {
+        
+        Part part = partsService.getPartById(id);
+        User user = part.getUser();
+        DaneUser daneUser = daneUserRepository.findByDaneUserId(user.getDaneUserId());
+        List<Ocena> oceny = ocenaRepository.findByIdUser(user.getDaneUserId());
+        Integer ocena = 0;
+        if(!oceny.isEmpty()){
+            int i = 0;
+            int suma = 0;
+            for(Ocena o : oceny){
+                i++;
+                suma+=o.getOcena();
+            }
+            ocena=suma/i;
+        }
+
+        model.addAttribute("part", part);
+        model.addAttribute("ocena", ocena);
+        model.addAttribute("daneUser", daneUser);
+        model.addAttribute("user", user);
+
+        // Zwracanie nazwy widoku "product-page", który zostanie wyrenderowany w wyniku żądania
+        return "product-page_eng";
+    }
     
     
 }

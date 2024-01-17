@@ -31,18 +31,35 @@
     <h1 class="cart-header">Your cart</h1>
     <div class="content-container">
       <div class="products-container">
-        <div class="product">Product 1<br />$50</div>
-        <div class="product">Product 2<br />$30</div>
-        <div class="product">Product 3<br />$25</div>
-        <div class="product">
-          <img src="img/Qiyana.png" /> Product 4<br />$40
+        <div class="table-container">
+          <table class="part-table">
+            <thead>
+              <tr>
+                <th>Zdjęcie</th>
+                <th>Nazwa</th>
+                <th>Cena</th>
+              </tr>
+            </thead>
+            <tbody id="table-body">
+              <!-- Thymeleaf each loop to iterate over the parts -->
+              <tr th:each="part : ${parts}">
+                <td>
+                  <img
+                    th:src="'data:image/png;base64,' + ${part.firstImageBase64}"
+                    alt="Part Image"
+                  />
+                </td>
+                <td th:text="${part.title}"></td>
+                <td th:text="${part.price}"></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
       <div class="summary">
         <h2>Summary</h2>
-        <p>Total: $145</p>
+        <p>Total: <span th:text="${price}"></span></p>
         <p>Shipping: $10</p>
-        <p><strong>Grand Total: $155</strong></p>
         <a href="#" class="order-button">Place Order</a>
       </div>
     </div>

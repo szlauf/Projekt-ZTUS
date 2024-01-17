@@ -41,6 +41,9 @@
             <label for="title">Nazwa ogłoszenia:</label>
             <input type="text" id="title" name="title" required />
 
+            <label for="title">Cena:</label>
+            <input type="text" id="price" name="price" required />
+
             <label for="image">Zdjęcie:</label>
             <input
               type="file"
@@ -58,16 +61,136 @@
               cols="50"
               required
             ></textarea>
+          
+            <div class="input-container">
+              <div class="label-and-select">
+                <label for="brand">Marka:</label>
+                <div class="select-container">
+                  <select
+                    class="custom-select"
+                    id="brand"
+                    name="brand"
+                    onchange="updateModels()"
+                  >
+                    <option value="" disabled selected>Wybierz markę</option>
+                    <option
+                      th:each="marka : ${marki}"
+                      th:value="${marka.nazwaMarki}"
+                      th:text="${marka.nazwaMarki}"
+                    ></option>
+                  </select>
+                </div>
+              </div>
+              <div class="label-and-select">
+                <label for="model">Model:</label>
+                <div class="select-container">
+                  <select
+                    class="custom-select"
+                    id="model"
+                    name="model"
+                    onchange="updateGenerations()"
+                  >
+                    <option value="" disabled selected>Wybierz model</option>
+                  </select>
+                </div>
+              </div>
+              <div class="label-and-select">
+                <label for="year">Generacja:</label>
+                <div class="select-container">
+                  <select class="custom-select" id="year" name="year">
+                    <option value="" disabled selected>Generacja</option>
+                  </select>
+                </div>
+              </div>
+              <div class="label-and-select">
+                <label for="production-year">Rok produkcji:</label>
+                <div class="select-container">
+                  <select
+                    class="custom-select"
+                    id="production-year"
+                    name="production-year"
+                  >
+                    <option value="" disabled selected>
+                      Wybierz rok produkcji
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+             
+            </div> 
             <button class="button1">Dodaj Ogłoszenie</button>
-          </form>
-
-        </div>
+        </form>
       </div>
+      <script th:inline="javascript">
+        function updateGenerations() {
+          var selectedModel = document.getElementById("model").value;
+          var generations = /*[[${models}]]*/ [];
+  
+          var generationDropdown = document.getElementById("year");
+          generationDropdown.innerHTML =
+            '<option value="" disabled selected>Generacja</option>';
+  
+          for (var i = 0; i < generations.length; i++) {
+            if (generations[i].nazwaModelu === selectedModel) {
+              var option = document.createElement("option");
+              option.value = generations[i].generacja;
+              option.text = generations[i].generacja;
+              generationDropdown.add(option);
+            }
+          }
+        }
+  
+        function updateModels() {
+          var selectedBrand = document.getElementById("brand").value;
+          var models = /*[[${models}]]*/ [];
+  
+          var modelDropdown = document.getElementById("model");
+          modelDropdown.innerHTML =
+            '<option value="" disabled selected>Wybierz model</option>';
+  
+          for (var i = 0; i < models.length; i++) {
+            if (models[i].marka.nazwaMarki === selectedBrand) {
+              var option = document.createElement("option");
+              option.value = models[i].nazwaModelu;
+              option.text = models[i].nazwaModelu;
+              modelDropdown.add(option);
+            }
+          }
+  
+          // After updating models, also update generations
+          updateGenerations();
+        }
+    </script>
+    <script th:inline="javascript">
+      
+      window.onload = function() {
+          populateProductionYears();
+      }
+    
+      function populateProductionYears() {
+          var currentYear = new Date().getFullYear();
+          var productionYearDropdown = document.getElementById('production-year');
+          
+          productionYearDropdown.innerHTML = '<option value="" disabled selected>Wybierz rok produkcji</option>';
+          
+          for (var year = currentYear; year >= 1990; year--) {
+              var option = document.createElement('option');
+              option.value = year;
+              option.text = year;
+              productionYearDropdown.add(option);
+          }
+      }
+  
+      </script>
+  
+      <script src="/js/darkmode.js"></script>
     </main>
 
     <footer>
       <p>&copy; TurboBay. Wszelkie prawa zastrzeżone.</p>
     </footer>
-    <script src="/js/darkmode.js"></script>
+
+    
   </body>
 </html>

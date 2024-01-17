@@ -47,6 +47,19 @@ public class Part {
     // Pole przechowujące obraz w formacie Base64
     @Transient
     private String base64Image;
+
+    @Column(name = "is_archived")
+    private Boolean isArchived;
+
+    // Getter and setter for isArchived
+    public Boolean getIsArchived() {
+        return isArchived;
+    }
+
+    public void setIsArchived(Boolean isArchived) {
+        this.isArchived = isArchived;
+    }
+
     // Metoda pobierająca obraz w formie Base64
     public String getBase64Image() {
         return base64Image;

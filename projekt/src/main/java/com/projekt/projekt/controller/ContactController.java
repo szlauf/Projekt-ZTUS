@@ -14,5 +14,12 @@ public class ContactController {
         // Zwraca nazwę widoku "contact", który zostanie wyrenderowany
         return "contact";
     }
+
+    // Metoda obsługująca żądanie GET na ścieżce "/contact"
+    @GetMapping("/contact_eng")
+    public String contactEng() {
+        // Zwraca nazwę widoku "contact", który zostanie wyrenderowany
+        return "contact_eng";
+    }
     
 }

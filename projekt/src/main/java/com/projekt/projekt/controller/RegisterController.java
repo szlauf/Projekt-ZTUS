@@ -61,6 +61,44 @@ public class RegisterController {
         return "login";
         
     }
+
+    @GetMapping("/registration_eng")
+    public String registrationEng() {
+        return "registration";
+    }
+
+    // Obsługuje żądania POST na "/registration" dotyczące rejestracji użytkownika
+    @PostMapping("/registration_eng")
+    public String registerEng(@RequestParam String login, @RequestParam String password, Model model, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam Integer phoneNumber, @RequestParam String city, @RequestParam String postalCode, @RequestParam String street, @RequestParam String apartmentNumber) {
+        
+        // Sprawdza, czy podana nazwa użytkownika jest już używana
+        if (userRepository.findByLogin(login) != null) {
+            model.addAttribute("error", "Username already in use. Please choose a different one.");
+            return "registration"; // Powrót do strony rejestracji z komunikatem błędu
+        }
+
+        System.out.print(password+login);
+        // Szyfruje hasło przy użyciu BCryptPasswordEncoder
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        User user = new User(login, passwordEncoder.encode(password));
+        
+        // Zapisuje użytkownika do UserRepository
+        userRepository.save(user);
+
+        // Ustawia DaneUserId dla użytkownika i aktualizuje użytkownika w UserRepository
+        user.setDaneUserId(user.getId());
+        userRepository.save(user);
+
+        // Tworzy nowego DaneUsera z danymi specyficznymi dla użytkownika
+        DaneUser daneUser = new DaneUser(user.getDaneUserId(), firstName, lastName, phoneNumber, city, postalCode, street, apartmentNumber, email);
+        
+        // Zapisuje DaneUsera do DaneUserRepository
+        daneUserRepository.save(daneUser);
+
+        // Przekierowuje do strony logowania po pomyślnej rejestracji
+        return "login_eng";
+        
+    }
     
     
 }

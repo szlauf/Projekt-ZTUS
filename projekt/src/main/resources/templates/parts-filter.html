@@ -38,7 +38,7 @@
                   name="brand"
                   onchange="updateModels()"
                 >
-                  <option value="" disabled selected>Wybierz markę</option>
+                  <option value="" selected>Wybierz markę</option>
                   <option
                     th:each="marka : ${marki}"
                     th:value="${marka.nazwaMarki}"
@@ -56,7 +56,7 @@
                   name="model"
                   onchange="updateGenerations()"
                 >
-                  <option value="" disabled selected>Wybierz model</option>
+                  <option value="" selected>Wybierz model</option>
                 </select>
               </div>
             </div>
@@ -64,7 +64,7 @@
               <label for="year">Generacja:</label>
               <div class="select-container">
                 <select class="custom-select" id="year" name="year">
-                  <option value="" disabled selected>Generacja</option>
+                  <option value="" selected>Generacja</option>
                 </select>
               </div>
             </div>
@@ -76,7 +76,7 @@
                   id="production-year"
                   name="production-year"
                 >
-                  <option value="" disabled selected>
+                  <option value="" selected>
                     Wybierz rok produkcji
                   </option>
                 </select>
@@ -100,7 +100,7 @@
         </thead>
         <tbody id="table-body">
           <!-- Thymeleaf each loop to iterate over the parts -->
-          <tr th:each="part : ${parts}">
+          <tr th:each="part : ${parts}" th:attr="data-part-id=${part.id}">
             <td>
               <img
                 th:src="'data:image/png;base64,' + ${part.firstImageBase64}"
@@ -155,7 +155,7 @@
 
         var generationDropdown = document.getElementById("year");
         generationDropdown.innerHTML =
-          '<option value="" disabled selected>Generacja</option>';
+          '<option value="" selected>Generacja</option>';
 
         for (var i = 0; i < generations.length; i++) {
           if (generations[i].nazwaModelu === selectedModel) {
@@ -173,7 +173,7 @@
 
         var modelDropdown = document.getElementById("model");
         modelDropdown.innerHTML =
-          '<option value="" disabled selected>Wybierz model</option>';
+          '<option value="" selected>Wybierz model</option>';
 
         for (var i = 0; i < models.length; i++) {
           if (models[i].marka.nazwaMarki === selectedBrand) {
@@ -219,6 +219,20 @@
           productionYearDropdown.value = productionYearFilter;
         }
       }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Add click event listener to each table row
+        var rows = document.querySelectorAll(".part-table tbody tr");
+        rows.forEach(function (row) {
+          row.addEventListener("click", function () {
+            // Get the part id from the data attribute or any other appropriate way
+            var partId = row.getAttribute("data-part-id");
+
+            // Redirect to the product-page with the part id
+            window.location.href = "/product-page?id=" + partId;
+          });
+        });
+      });
     </script>
   </body>
 </html>

@@ -53,7 +53,7 @@
                   name="brand"
                   onchange="updateModels()"
                 >
-                  <option value="" disabled selected>Wybierz markę</option>
+                  <option value="" selected>Wybierz markę</option>
                   <option
                     th:each="marka : ${marki}"
                     th:value="${marka.nazwaMarki}"
@@ -71,7 +71,7 @@
                   name="model"
                   onchange="updateGenerations()"
                 >
-                  <option value="" disabled selected>Wybierz model</option>
+                  <option value="" selected>Wybierz model</option>
                 </select>
               </div>
             </div>
@@ -79,7 +79,7 @@
               <label for="year">Generacja:</label>
               <div class="select-container">
                 <select class="custom-select" id="year" name="year">
-                  <option value="" disabled selected>Generacja</option>
+                  <option value="" selected>Generacja</option>
                 </select>
               </div>
             </div>
@@ -91,7 +91,7 @@
                   id="production-year"
                   name="production-year"
                 >
-                  <option value="" disabled selected>
+                  <option value="" selected>
                     Wybierz rok produkcji
                   </option>
                 </select>
@@ -176,7 +176,7 @@
 
         var generationDropdown = document.getElementById("year");
         generationDropdown.innerHTML =
-          '<option value="" disabled selected>Generacja</option>';
+          '<option value="" selected>Generacja</option>';
 
         for (var i = 0; i < generations.length; i++) {
           if (generations[i].nazwaModelu === selectedModel) {
@@ -194,7 +194,7 @@
 
         var modelDropdown = document.getElementById("model");
         modelDropdown.innerHTML =
-          '<option value="" disabled selected>Wybierz model</option>';
+          '<option value="" selected>Wybierz model</option>';
 
         for (var i = 0; i < models.length; i++) {
           if (models[i].marka.nazwaMarki === selectedBrand) {
@@ -240,7 +240,7 @@
         var currentYear = new Date().getFullYear();
         var productionYearDropdown = document.getElementById('production-year');
         
-        productionYearDropdown.innerHTML = '<option value="" disabled selected>Wybierz rok produkcji</option>';
+        productionYearDropdown.innerHTML = '<option value="" selected>Wybierz rok produkcji</option>';
         
         for (var year = currentYear; year >= 1990; year--) {
             var option = document.createElement('option');
@@ -249,7 +249,7 @@
             productionYearDropdown.add(option);
         }
     }
-      </script>
+
     </script>
     <script>
       // Definiujemy Konami Code
@@ -278,7 +278,7 @@
           userInput.every((key, index) => key === konamiCode[index])
         ) {
           // Jeśli tak, przekierowujemy użytkownika na zadeklarowaną stronę
-          window.location.href = "product-page.html";
+          window.location.href = "konami";
         }
       });
     </script>

@@ -15,11 +15,12 @@ public class LoginController {
         return "login";
     }
 
-    // Metoda obsługująca żądanie GET na ścieżce "/dashboard".
-    @GetMapping("/dashboard")
-    public String dashboard() {
+    // Metoda obsługująca żądanie GET na ścieżce "/login".
+    @GetMapping("/login_eng")
+    public String loginEng() {
 
-        // Zwracanie nazwy widoku "dashboard", który zostanie wyrenderowany dla użytkownika.
-        return "dashboard";
+        // Zwracanie nazwy widoku "login", który zostanie wyrenderowany dla użytkownika.
+        return "login_eng";
     }
+
 }
