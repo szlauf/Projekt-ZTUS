@@ -50,14 +50,16 @@ public class PartsController {
         return "czesci";
     }
     */
-    @GetMapping("/czesci")
-    public String czesci(@RequestParam(name = "brand", required = false) String brand,
-                      @RequestParam(name = "model", required = false) String smodel,
-                      @RequestParam(name = "year", required = false) String year,
-                      @RequestParam(name = "productionYear", required = false) String productionYear,
-                      ModelMap model) {
+    @GetMapping("/parts-filter")
+    public String czesci(@RequestParam(name = "price", required = false) Integer price,
+                        @RequestParam(name = "brand", required = false) String brand,
+                        @RequestParam(name = "model", required = false) String smodel,
+                        @RequestParam(name = "generation", required = false) String generation,
+                        @RequestParam(name = "productionYear", required = false) Integer productionYear,
+                        @RequestParam(name = "type", required = false) String type,
+                        ModelMap model) {
 
-    List<Part> parts = partsService.getFilteredParts(brand, smodel, year, productionYear);
+    List<Part> parts = partsService.getFilteredParts(price, brand, smodel, generation, productionYear, type);
     List<Marka> marki = markaRepository.findAll();
     List<Model> models = modelRepository.findAll();
     model.addAttribute("marki", marki);
@@ -72,7 +74,7 @@ public class PartsController {
     });
 
     model.addAttribute("parts", parts);
-    return "czesci";
+    return "parts-filter";
 }
  
     

@@ -21,13 +21,13 @@
   <body>
     <nav class="navbar">
       <div class="icons">
-        <a href="product-add.html"
+        <a href="product-add"
           ><img src="/img/plus-icon.png" alt="Icon 1"
         /></a>
-        <a href="cart.html"
+        <a href="cart"
           ><img src="/img/ic-shopping-cart-24px-1@1x.png" alt="Icon 2"
         /></a>
-        <a href="profile.html"
+        <a href="profile"
           ><img src="/img/ic-perm-identity-24px-1@1x.png" alt="Icon 3"
         /></a>
       </div>
@@ -207,41 +207,52 @@
         // After updating models, also update generations
         updateGenerations();
       }
+  </script>
+  <script th:inline="javascript">
+    
+    window.onload = function() {
+        populateProductionYears();
+    }
+
+    function searchCars() {
+      // Get selected filters
+      var selectedBrand = document.getElementById('brand').value;
+      var selectedModel = document.getElementById('model').value;
+      var selectedYear = document.getElementById('year').value;
+      var selectedProductionYear = document.getElementById('production-year').value;
+  
+      // Construct query string
+      var queryString = '';
+      if (selectedBrand) queryString += 'brand=' + encodeURIComponent(selectedBrand) + '&';
+      if (selectedModel) queryString += 'model=' + encodeURIComponent(selectedModel) + '&';
+      if (selectedYear) queryString += 'generation=' + encodeURIComponent(selectedYear) + '&';
+      if (selectedProductionYear) queryString += 'productionYear=' + encodeURIComponent(selectedProductionYear) + '&';
+  
+      // Remove trailing '&' if present
+      queryString = queryString.replace(/&$/, '');
+  
+      // Redirect to the second page with the query string
+      window.location.href = '/parts-filter?' + queryString;
+    }
+  
+    function populateProductionYears() {
+        var currentYear = new Date().getFullYear();
+        var productionYearDropdown = document.getElementById('production-year');
+        
+        productionYearDropdown.innerHTML = '<option value="" disabled selected>Wybierz rok produkcji</option>';
+        
+        for (var year = currentYear; year >= 1990; year--) {
+            var option = document.createElement('option');
+            option.value = year;
+            option.text = year;
+            productionYearDropdown.add(option);
+        }
+    }
+      </script>
+      
+
     </script>
-    <script th:inline="javascript">
-      function searchCars() {
-        // Get selected filters
-        var selectedBrand = document.getElementById("brand").value;
-        var selectedModel = document.getElementById("model").value;
-        var selectedYear = document.getElementById("year").value;
-        var selectedProductionYear =
-          document.getElementById("production-year").value;
-
-        // Construct query string
-        var queryString = "";
-        if (selectedBrand)
-          queryString += "brand=" + encodeURIComponent(selectedBrand) + "&";
-        if (selectedModel)
-          queryString += "model=" + encodeURIComponent(selectedModel) + "&";
-        if (selectedYear)
-          queryString += "year=" + encodeURIComponent(selectedYear) + "&";
-        if (selectedProductionYear)
-          queryString +=
-            "production-year=" +
-            encodeURIComponent(selectedProductionYear) +
-            "&";
-
-        // Remove trailing '&' if present
-        queryString = queryString.replace(/&$/, "");
-
-        // Redirect to the second page with the query string
-        window.location.href = "/czesci?" + queryString;
-      }
-
-      // Rest of your script...
-    </script>
-    <button id="toggleModeButton">Przełącz motyw</button>
-
-    <script src="/js/darkmode.js"></script>
+      <button id="toggleModeButton">Przełącz motyw</button>
+      <script src="/js/darkmode.js"></script>
   </body>
 </html>

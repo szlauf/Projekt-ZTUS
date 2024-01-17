@@ -5,20 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Części Samochodowe</title>
-    <link rel="stylesheet" href="style6.css">
+    <link rel="stylesheet" href="/css/style6.css">
 </head>
 
 <body>
     <header>
         <h1>Części Samochodowe</h1>
-        <div id="upperSite">
-            <nav>
-                <a href="#">Strona Główna</a>
-                <a href="#">Części Samochodowe</a>
-                <a href="#">Samochody</a>
-                <a href="#">Motocykle</a>
-            </nav>
-        </div>
+        <nav class="navbar">
+            <div class="icons">
+              <a href="product-add"
+                ><img src="/img/plus-icon.png" alt="Icon 1"
+              /></a>
+              <a href="cart"
+                ><img src="/img/ic-shopping-cart-24px-1@1x.png" alt="Icon 2"
+              /></a>
+              <a href="profile"
+                ><img src="/img/ic-perm-identity-24px-1@1x.png" alt="Icon 3"
+              /></a>
+            </div>
+          </nav>
         <div id="filters">
             <select id="filter-price">
                 <option value="">Cena</option>
@@ -54,7 +59,7 @@
         </div>
     </header>
     <table>
-        <thead>generacja
+        <thead>
             <tr>
                 <th>Zdjęcie</th>
                 <th>Nazwa</th>
@@ -76,6 +81,10 @@
 
     <script th:inline="javascript">
 
+        window.onload = function() {
+            populateProductionYears();
+        }
+
         function getQueryStringParameter(name) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(name);
@@ -83,9 +92,12 @@
 
         const brandFilter = getQueryStringParameter('brand');
         const modelFilter = getQueryStringParameter('model');
-        const yearFilter = getQueryStringParameter('year');
-        const productionYearFilter = getQueryStringParameter('production-year');
-
+        const generationFilter = getQueryStringParameter('generation');
+        const productionYearFilter = getQueryStringParameter('productionYear');
+        const priceFilter = getQueryStringParameter('price');
+        const typeFilter = getQueryStringParameter('type');
+        const conditionFilter = getQueryStringParameter('condition');
+        
         if (brandFilter!=""&&brandFilter) {
             document.getElementById('filter-brand').value = brandFilter;
             updateModels();
@@ -103,15 +115,21 @@
             updateGenerations();
         }
 
-        if (yearFilter!=""&&yearFilter) {
-            document.getElementById('generacja').value = yearFilter;
+        if (generationFilter!=""&&generationFilter) {
+            document.getElementById('generacja').value = generationFilter;
         }
 
-        if (productionYearFilter!=""&&productionYearFilter) {
-            document.getElementById('filter-year').value = productionYearFilter;
+        if (priceFilter!=""&&priceFilter){
+            document.getElementById('filter-price').value = priceFilter;
         }
 
+        if (typeFilter!=""&&typeFilter){
+            document.getElementById('filter-type').value=typeFilter;
+        }
 
+        if (conditionFilter!=""&&conditionFilter){
+            document.getElementById('filter-condition').value = conditionFilter;
+        }
 
         function updateGenerations() {
             var selectedModel = document.getElementById('model').value;
@@ -152,18 +170,37 @@
         
         function onFilterChange() {
             // Get selected filter values
+            const price = document.getElementById('filter-price').value;
             const brand = document.getElementById('filter-brand').value;
             const model = document.getElementById('model').value;
-            const year = document.getElementById('generacja').value;
+            const generation = document.getElementById('generacja').value;
             const productionYear = document.getElementById('filter-year').value;
+            const type = document.getElementById('filter-type').value;
+            const condition = document.getElementById('filter-condition').value;
 
             // Construct the new URL with filter parameters
-            const newUrl = `/czesci?brand=${brand}&model=${model}&year=${year}&productionYear=${productionYear}`;
+            const newUrl = `/parts-filter?price=${price}&brand=${brand}&model=${model}&generation=${generation}&productionYear=${productionYear}&type=${type}&condition=${condition}`;
 
             // Redirect to the new URL
             window.location.href = newUrl;
         }
+        function populateProductionYears() {
+            var currentYear = new Date().getFullYear();
+            var productionYearDropdown = document.getElementById('filter-year');
+            
+            productionYearDropdown.innerHTML = '<option value="">Rok produkcji</option>';
+            
+            for (var year = currentYear; year >= 1990; year--) {
+                var option = document.createElement('option');
+                option.value = year;
+                option.text = year;
+                productionYearDropdown.add(option);
+            }
 
+            if (productionYearFilter!=""&&productionYearFilter) {
+                productionYearDropdown.value = productionYearFilter;
+            }
+        }
     </script>
 </body>
 

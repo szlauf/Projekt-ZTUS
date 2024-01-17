@@ -22,14 +22,9 @@ public class PartsService {
         return partsRepository.findAll();
     }
 
-    
-    public List<Part> getFilteredParts(String brand, String smodel, String year, String productionYear) {
-        Model model = modelRepository.findByNazwaModeluAndGeneracja(smodel, year);
-        Integer iproductionYear = null;
-        if(productionYear!=null)
-            iproductionYear = Integer.valueOf(productionYear);
-        return partsRepository.findByModelAndCarProductionYear(model, iproductionYear);
+    public List<Part> getFilteredParts(Integer price, String brand, String smodel, String generation, Integer productionYear, String type) {
+        Model model = modelRepository.findByNazwaModeluAndGeneracja(smodel, generation);
+        return partsRepository.findByModelAndCarProductionYear(model, productionYear);
     }
-
-    
 }
+
