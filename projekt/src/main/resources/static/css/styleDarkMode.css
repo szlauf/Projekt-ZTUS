@@ -13,6 +13,20 @@ body {
   justify-content: flex-end;
   height: 60px;
 }
+#toggleModeButton {
+  margin-right: 30px;
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#toggleModeButton:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
 
 h1 {
   font-size: 40px;
