@@ -658,3 +658,5 @@ select:hover {
     font-size: 30px;
   }
 }
+#map {margin-top: 50px; 
+  height: 50%; }
