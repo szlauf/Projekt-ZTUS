@@ -10,51 +10,52 @@ import jakarta.persistence.*;
 @Table(name = "ogloszenie")
 public class Part {
 
+    // Identyfikator części
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
+    // Tytuł części
     @Column(name = "tytul")
     private String title;
-
+    // Opis części
     @Column(name = "opis")
     private String description;
-
+    // Powiązanie z użytkownikiem - właścicielem części
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
+    // Powiązanie z modelem części
     @ManyToOne
     @JoinColumn(name = "id_modelu")
     private Model model;
-
+    // Rok produkcji samochodu, do którego pasuje część
     @Column(name = "rok_produkcji_samochodu")
     private Integer carProductionYear;
-
+    // Producent części
     @Column(name = "producent")
     private String manufacturer;
-
+    // Cena części
     @Column(name = "cena")
     private Integer price;
-
+     // Ilość dostępnych sztuk danej części
     @Column(name = "ilosc")
     private Integer quantity;
-
+    // Lista zdjęć części
     @OneToMany(mappedBy = "part", cascade = CascadeType.ALL)
     private List<Zdjecie> zdjecia;
-
+    // Pole przechowujące obraz w formacie Base64
     @Transient
     private String base64Image;
-
+    // Metoda pobierająca obraz w formie Base64
     public String getBase64Image() {
         return base64Image;
     }
-
+    // Metoda ustawiająca obraz w formie Base64
     public void setBase64Image(String base64Image) {
         this.base64Image = base64Image;
     }
-
+    // Metoda zwracająca pierwsze zdjęcie w formie Base64
     @Transient
     public String getFirstImageBase64() {
         if (zdjecia != null && !zdjecia.isEmpty()) {
@@ -62,6 +63,8 @@ public class Part {
         }
         return null;
     }
+    
+     // Metody dostępowe do pól obiektu
 
     public List<Zdjecie> getZdjecia() {
         return zdjecia;

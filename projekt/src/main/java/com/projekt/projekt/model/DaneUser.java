@@ -5,40 +5,51 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * Klasa reprezentująca encję "dane_user" w bazie danych.
+ */
 @Entity
 @Table(name = "dane_user")
 public class DaneUser {
+
+    // Identyfikator encji w bazie danych
     @Id
     @Column(name = "dane_user_id")
     private Integer daneUserId;
+    // Imię użytkownika
     @Column(name = "imie")
     private String imie;
+    // Nazwisko użytkownika
     @Column(name = "nazwisko")
     private String nazwisko;
+    // Numer telefonu użytkownika
     @Column(name = "nr_telefonu")
     private Integer nrTelefonu;
+    // Miasto zamieszkania użytkownika
     @Column(name = "miasto")
     private String miasto;
+    // Kod pocztowy użytkownika
     @Column(name = "kod_pocztowy")
     private String kodPocztowy;
+    // Ulica zamieszkania użytkownika
     @Column(name = "ulica")
     private String ulica;
+    // Numer mieszkania użytkownika
     @Column(name = "nr_mieszkania")
     private String nrMieszkania;
+    // Adres email użytkownika
     @Column(name = "email")
     private String email;
     public Integer getDaneUserId() {
         return daneUserId;
     }
 
-    
-
+    // Konstruktor domyślny
     public DaneUser() {
-        
+    
     }
 
-
-
+    // Konstruktor parametrowy
     public DaneUser(Integer daneUserId, String imie, String nazwisko, Integer nrTelefonu, String miasto,
             String kodPocztowy, String ulica, String nrMieszkania, String email) {
         this.daneUserId = daneUserId;
@@ -51,6 +62,8 @@ public class DaneUser {
         this.nrMieszkania = nrMieszkania;
         this.email = email;
     }
+
+    // Metody dostępowe do pól obiektu
 
     public void setDaneUserId(Integer daneUserId) {
         this.daneUserId = daneUserId;

@@ -300,7 +300,7 @@ select:hover {
   justify-content: space-evenly;
   align-items: flex-start;
   padding: 20px;
-  background-color: #333;
+  background-color: #eaeaea;
 }
 
 .cart-header {

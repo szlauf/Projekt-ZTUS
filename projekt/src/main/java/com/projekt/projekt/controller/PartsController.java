@@ -30,6 +30,8 @@ public class PartsController {
     private ModelRepository modelRepository;
 
     /*
+    // Komentarz: Obsługuje żądanie GET na endpoint "/czesci".
+    // Pobiera wszystkie części, marki i modele, a następnie przetwarza zdjęcia na base64.
     @GetMapping("/czesci")
     public String czesci(ModelMap model) {
         List<Part> parts = partsService.getAllParts();
@@ -50,6 +52,9 @@ public class PartsController {
         return "czesci";
     }
     */
+
+    // Komentarz: Obsługuje żądanie GET na endpoint "/parts-filter" z parametrami.
+    // Pobiera i filtruje części na podstawie przekazanych parametrów, a następnie przetwarza zdjęcia na base64.
     @GetMapping("/parts-filter")
     public String czesci(@RequestParam(name = "price", required = false) Integer price,
                         @RequestParam(name = "brand", required = false) String brand,

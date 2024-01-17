@@ -51,17 +51,17 @@ public class SecurityConfig {
             .addFilterBefore(new CaptchaFilter(recaptchaSecretKey), UsernamePasswordAuthenticationFilter.class)
             .build();
     }
-
+    // Konfiguracja szyfrowania haseł
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
+    // Konfiguracja obsługi sukcesu logowania
     @Bean
     AuthenticationSuccessHandler authenticationSuccessHandler() {
         return new CustomAuthenticationSuccessHandler();
     }
-
+    // Konfiguracja dostawcy uwierzytelniania
     @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authenticationProvider=new DaoAuthenticationProvider();
