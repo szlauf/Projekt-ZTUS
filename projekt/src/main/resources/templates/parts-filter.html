@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style6.css" />
+    <link rel="stylesheet" href="/css/style6.css" />
   </head>
 
   <body>
@@ -32,15 +32,30 @@
             <div class="label-and-select">
               <label for="brand">Marka:</label>
               <div class="select-container">
-                <select class="custom-select" id="brand" name="brand">
+                <select
+                  class="custom-select"
+                  id="brand"
+                  name="brand"
+                  onchange="updateModels()"
+                >
                   <option value="" disabled selected>Wybierz markę</option>
+                  <option
+                    th:each="marka : ${marki}"
+                    th:value="${marka.nazwaMarki}"
+                    th:text="${marka.nazwaMarki}"
+                  ></option>
                 </select>
               </div>
             </div>
             <div class="label-and-select">
               <label for="model">Model:</label>
               <div class="select-container">
-                <select class="custom-select" id="model" name="model">
+                <select
+                  class="custom-select"
+                  id="model"
+                  name="model"
+                  onchange="updateGenerations()"
+                >
                   <option value="" disabled selected>Wybierz model</option>
                 </select>
               </div>
@@ -68,7 +83,7 @@
               </div>
             </div>
           </div>
-          <button type="button" class="button" onclick="searchCars()">
+          <button type="button" class="button" onclick="onFilterChange()">
             Szukaj
           </button>
         </form>
@@ -113,12 +128,9 @@
       const modelFilter = getQueryStringParameter("model");
       const generationFilter = getQueryStringParameter("generation");
       const productionYearFilter = getQueryStringParameter("productionYear");
-      const priceFilter = getQueryStringParameter("price");
-      const typeFilter = getQueryStringParameter("type");
-      const conditionFilter = getQueryStringParameter("condition");
 
       if (brandFilter != "" && brandFilter) {
-        document.getElementById("filter-brand").value = brandFilter;
+        document.getElementById("brand").value = brandFilter;
         updateModels();
       }
 
@@ -134,26 +146,14 @@
       }
 
       if (generationFilter != "" && generationFilter) {
-        document.getElementById("generacja").value = generationFilter;
-      }
-
-      if (priceFilter != "" && priceFilter) {
-        document.getElementById("filter-price").value = priceFilter;
-      }
-
-      if (typeFilter != "" && typeFilter) {
-        document.getElementById("filter-type").value = typeFilter;
-      }
-
-      if (conditionFilter != "" && conditionFilter) {
-        document.getElementById("filter-condition").value = conditionFilter;
+        document.getElementById("year").value = generationFilter;
       }
 
       function updateGenerations() {
         var selectedModel = document.getElementById("model").value;
         var generations = /*[[${models}]]*/ [];
 
-        var generationDropdown = document.getElementById("generacja");
+        var generationDropdown = document.getElementById("year");
         generationDropdown.innerHTML =
           '<option value="" disabled selected>Generacja</option>';
 
@@ -168,7 +168,7 @@
       }
 
       function updateModels() {
-        var selectedBrand = document.getElementById("filter-brand").value;
+        var selectedBrand = document.getElementById("brand").value;
         var models = /*[[${models}]]*/ [];
 
         var modelDropdown = document.getElementById("model");
@@ -190,23 +190,20 @@
 
       function onFilterChange() {
         // Get selected filter values
-        const price = document.getElementById("filter-price").value;
-        const brand = document.getElementById("filter-brand").value;
+        const brand = document.getElementById("brand").value;
         const model = document.getElementById("model").value;
-        const generation = document.getElementById("generacja").value;
-        const productionYear = document.getElementById("filter-year").value;
-        const type = document.getElementById("filter-type").value;
-        const condition = document.getElementById("filter-condition").value;
+        const generation = document.getElementById("year").value;
+        const productionYear = document.getElementById("production-year").value;
 
         // Construct the new URL with filter parameters
-        const newUrl = `/parts-filter?price=${price}&brand=${brand}&model=${model}&generation=${generation}&productionYear=${productionYear}&type=${type}&condition=${condition}`;
+        const newUrl = `/parts-filter?brand=${brand}&model=${model}&generation=${generation}&productionYear=${productionYear}`;
 
         // Redirect to the new URL
         window.location.href = newUrl;
       }
       function populateProductionYears() {
         var currentYear = new Date().getFullYear();
-        var productionYearDropdown = document.getElementById("filter-year");
+        var productionYearDropdown = document.getElementById("production-year");
 
         productionYearDropdown.innerHTML =
           '<option value="">Rok produkcji</option>';

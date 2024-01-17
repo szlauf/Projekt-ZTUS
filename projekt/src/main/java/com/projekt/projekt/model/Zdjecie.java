@@ -9,6 +9,7 @@ public class Zdjecie {
     // Deklaracja pola identyfikatora encji
     @Id
     // Deklaracja informacji o kolumnie w bazie danych, z którą jest powiązane pole
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 

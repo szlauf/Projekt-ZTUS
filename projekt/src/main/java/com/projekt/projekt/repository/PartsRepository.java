@@ -2,6 +2,7 @@ package com.projekt.projekt.repository;
 
 import com.projekt.projekt.model.Model;
 import com.projekt.projekt.model.Part;
+import com.projekt.projekt.model.User;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface PartsRepository extends JpaRepository<Part, Long> {
     // Zwraca:
     // - Lista obiektów klasy Part spełniających kryteria wyszukiwania
     List<Part> findByModelAndCarProductionYear(Model model, Integer carProductionYear);
+    List<Part> findByUser(User user);
+    Part findById(Integer id);
 }

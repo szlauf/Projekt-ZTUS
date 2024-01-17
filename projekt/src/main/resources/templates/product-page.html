@@ -37,15 +37,13 @@
       </div>
       <div class="product-container">
         <div class="product-info">
-          <div class="title">Czarnuch na sprzedaż</div>
-          <div class="price">69420zł</div>
+          <div class="title"><span th:text="${part.title}"></span></div>
+          <div class="price"><span th:text="${part.price}"></span></div>
         </div>
         <div class="product-description">
           <h3>Opis</h3>
           <p>
-            bezobsługowy czarnuch, idealny do pracy na polu bawełny, jak nie
-            baedzie chciał działać prosze potraktować go biczem
-            niggerniggerniggerniggerniggerniggerniggerniggerniggerniggerniggerniggernigger
+            <span th:text="${part.description}"></span>
           </p>
         </div>
       </div>
@@ -54,8 +52,8 @@
 
     <div class="seller-info">
       <img src="/img/user.png" alt="Icon 3" />
-      <p>Nazwa użytkownika</p>
-      <div class="sellers-opinion">pizda</div>
+      <p><span th:text="${user.login}"></span></p>
+      <div class="sellers-opinion"><span th:text="${ocena}+'/5'"></span></div>
       <div class="cnt-button-container">
         <button class="contact-button">Napisz Wiadomość</button>
         <button class="contact-button2">Zadzwoń</button>

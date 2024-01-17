@@ -38,12 +38,12 @@
         <div class="section profile-section">
           <h1>Moje Dane</h1>
           <div class="user-info">
-            <p><strong>Imię:</strong> John</p>
-            <p><strong>Nazwisko:</strong> Doe</p>
-            <p><strong>Nazwa Użytkownika:</strong> johndoe123</p>
-            <p><strong>Email:</strong> john.doe@example.com</p>
-            <p><strong>Numer telefonu:</strong> +123456789</p>
-            <p><strong>Adres:</strong> UK, London, Main Street</p>
+            <p><strong>Imię:</strong> <span th:text="${daneUser.imie}"></span></p>
+            <p><strong>Nazwisko:</strong> <span th:text="${daneUser.nazwisko}"></span></p>
+            <p><strong>Nazwa Użytkownika:</strong> <span th:text="${user.login}"></span></p>
+            <p><strong>Email:</strong> <span th:text="${daneUser.email}"></span></p>
+            <p><strong>Numer telefonu:</strong> <span th:text="${daneUser.nrTelefonu}"></span></p>
+            <p><strong>Adres:</strong> <span th:text="${daneUser.kodPocztowy + ' ' + daneUser.miasto + ' ' + daneUser.ulica + ' ' + daneUser.nrMieszkania}"></span></p>
           </div>
         </div>
       </div>
@@ -52,14 +52,33 @@
         <div class="section small-section">
           <h2>Moje Zamówienia</h2>
           <div class="orders">
-            <div class="order"></div>
+            <table>
+              <tbody id="order">
+                  <tr th:each="order : ${orders}">
+                      <td>
+                          <img th:src="'data:image/png;base64,' + ${order.firstImageBase64}" alt="Part Image">
+                      </td>
+                      <td th:text="${order.title}"></td>
+                  </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
         <div class="section small-section">
           <h2>Moje Ogłoszenia</h2>
           <div class="announcements">
-            <div class="announcement"></div>
+            <table>
+              <tbody id="announcements">
+                  <!-- Thymeleaf each loop to iterate over the parts -->
+                  <tr th:each="part : ${parts}">
+                      <td>
+                          <img th:src="'data:image/png;base64,' + ${part.firstImageBase64}" alt="Part Image">
+                      </td>
+                      <td th:text="${part.title}"></td>
+                  </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

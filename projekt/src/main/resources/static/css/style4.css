@@ -117,6 +117,79 @@ h3 {
   justify-content: center;
 }
 
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.part-table {
+  justify-content: center;
+  margin-top: 5%;
+  position: relative;
+  width: 80%;
+  border-collapse: separate;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.part-table th,
+.part-table td {
+  padding: 1rem;
+  text-align: left;
+  vertical-align: middle;
+  border: 1px solid #ccc;
+}
+
+.part-table th {
+  position: relative;
+  background-color: #f2f2f2;
+  font-weight: 500;
+}
+
+.part-table th::before,
+.part-table th::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  width: 100%;
+  height: 2px;
+  background-color: #343a40;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.part-table th::before {
+  left: 0;
+}
+
+.part-table th::after {
+  right: 0;
+  background-color: white;
+}
+
+.part-table th:hover::before,
+.part-table th:hover::after {
+  opacity: 1;
+}
+
+.part-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.part-table tr:last-child td {
+  border-bottom: none;
+}
+
+.part-table td:first-child img {
+  width: 100px;
+  height: auto;
+  margin-right: 1rem;
+}
+
+.part-table tr:hover {
+  border: 1px solid #4caf50;
+}
+
 form {
   display: flex;
   flex-direction: column;

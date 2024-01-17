@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: "Lato";
+  margin: 0;
+  background-color: #e6e6e6;
+}
+
 .navbar {
   background-color: white;
   border-top: 1px solid black;
@@ -29,11 +35,6 @@
 #toggleModeButton:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
-body {
-  font-family: "Lato";
-  margin: 0;
-  background-color: #e6e6e6;
-}
 
 .icons {
   display: flex;
@@ -55,6 +56,7 @@ body {
   width: 30px;
   height: 30px;
 }
+
 .background-container {
   position: relative;
   overflow: hidden;
@@ -96,7 +98,7 @@ h3 {
 
 .background-container::before {
   content: "";
-  background: url("img/porsz.jpg") center/cover no-repeat;
+  background: url("/img/porsz.jpg") center/cover no-repeat;
   position: absolute;
   top: 0;
   left: 0;
@@ -113,7 +115,6 @@ h3 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 70%;
 }
 
 form {

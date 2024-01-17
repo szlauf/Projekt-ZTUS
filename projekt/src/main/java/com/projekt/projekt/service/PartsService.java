@@ -2,6 +2,7 @@ package com.projekt.projekt.service;
 
 import com.projekt.projekt.model.Model;
 import com.projekt.projekt.model.Part;
+import com.projekt.projekt.model.User;
 import com.projekt.projekt.repository.ModelRepository;
 import com.projekt.projekt.repository.PartsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,24 +30,30 @@ public class PartsService {
         return partsRepository.findAll();
     }
 
-
     /**
      * Pobiera filtrowane części na podstawie podanych kryteriów.
      *
-     * param price          Cena części.
      * param brand          Marka części.
      * param smodel         Nazwa modelu samochodu.
      * param generation     Generacja samochodu.
      * param productionYear Rok produkcji samochodu.
-     * param type           Typ części.
      * return Lista obiektów Part reprezentujących części spełniające podane kryteria.
      */
-    public List<Part> getFilteredParts(Integer price, String brand, String smodel, String generation, Integer productionYear, String type) {
-
-        // Komentarz: Wyszukiwanie modelu na podstawie nazwy modelu i generacji.
+    public List<Part> getFilteredParts(String brand, String smodel, String generation, Integer productionYear) {
         Model model = modelRepository.findByNazwaModeluAndGeneracja(smodel, generation);
-        // Komentarz: Pobieranie części na podstawie modelu i roku produkcji samochodu.
         return partsRepository.findByModelAndCarProductionYear(model, productionYear);
+    }
+
+    public List<Part> getUserParts(User user){
+        return partsRepository.findByUser(user);
+    }
+
+    public Part getUserOrders(Integer id){
+        return partsRepository.findById(id);
+    }
+
+    public Part getPartById(Integer id){
+        return partsRepository.findById(id);
     }
 }
 

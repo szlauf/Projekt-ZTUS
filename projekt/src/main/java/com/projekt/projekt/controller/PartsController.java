@@ -56,15 +56,13 @@ public class PartsController {
     // Komentarz: Obsługuje żądanie GET na endpoint "/parts-filter" z parametrami.
     // Pobiera i filtruje części na podstawie przekazanych parametrów, a następnie przetwarza zdjęcia na base64.
     @GetMapping("/parts-filter")
-    public String czesci(@RequestParam(name = "price", required = false) Integer price,
-                        @RequestParam(name = "brand", required = false) String brand,
+    public String czesci(@RequestParam(name = "brand", required = false) String brand,
                         @RequestParam(name = "model", required = false) String smodel,
                         @RequestParam(name = "generation", required = false) String generation,
                         @RequestParam(name = "productionYear", required = false) Integer productionYear,
-                        @RequestParam(name = "type", required = false) String type,
                         ModelMap model) {
 
-    List<Part> parts = partsService.getFilteredParts(price, brand, smodel, generation, productionYear, type);
+    List<Part> parts = partsService.getFilteredParts(brand, smodel, generation, productionYear);
     List<Marka> marki = markaRepository.findAll();
     List<Model> models = modelRepository.findAll();
     model.addAttribute("marki", marki);
