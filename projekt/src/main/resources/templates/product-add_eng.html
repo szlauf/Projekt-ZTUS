@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add offer - Car Parts</title>
+    <link rel="stylesheet" href="/css/style8.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="icons">
+        <a href="product-add"
+          ><img src="/img/plus-icon.png" alt="Icon 1"
+        /></a>
+        <a href="index"
+          ><img src="/img/ic-search-24px-1@1x.png" alt="Icon 1"
+        /></a>
+        <a href="cart"
+          ><img src="/img/ic-shopping-cart-24px-1@1x.png" alt="Icon 2"
+        /></a>
+        <a href="profile"
+          ><img src="/img/ic-perm-identity-24px-1@1x.png" alt="Icon 3"
+        /></a>
+      </div>
+    </nav>
+
+    <main>
+      <div class="content-container">
+        <div class="adding">
+          <h1>Add offer - Car Parts</h1>
+          <form
+            action="https://example.com/api/add-ad"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <label for="title">Offer name:</label>
+            <input type="text" id="title" name="title" required />
+
+            <label for="image">Photo:</label>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              accept="image/*"
+              required
+            />
+
+            <label for="description">Description:</label>
+            <textarea
+              id="description"
+              name="description"
+              rows="4"
+              cols="50"
+              required
+            ></textarea>
+          </form>
+
+          <div class="button1">
+            <button1>Add offer</button1>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; TurboBay. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+  </body>
+</html>

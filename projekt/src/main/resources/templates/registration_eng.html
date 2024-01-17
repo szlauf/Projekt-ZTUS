@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rejestracja</title>
+    <link rel="stylesheet" href="/css/style3.css" id="stylesheet"/>
+    <link rel="stylesheet" href="/css/style3DarkMode.css" id="darkModeStylesheet"
+    disabled/>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="icons">
+        <a href=""><img src="/img/ic-search-24px-1@1x.png" alt="Icon 1" /></a>
+        <a href=""
+          ><img src="/img/ic-shopping-cart-24px-1@1x.png" alt="Icon 2"
+        /></a>
+        <a href=""
+          ><img src="/img/ic-perm-identity-24px-1@1x.png" alt="Icon 3"
+        /></a>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="register-container">
+        <h1>Registration</h1>
+        <div th:if="${error}" class="error-message">
+          <p th:text="${error}"></p>
+        </div>
+        <!-- Sekcja danych osobowych -->
+        <div class="section">
+          <form action="/registration" method="post" class="registration-form">
+            <div class="personal-info">
+              <div class="input-container">
+                <label for="firstName">Name:</label>
+                <input type="text" id="firstName" name="firstName" required />
+              </div>
+
+              <div class="input-container">
+                <label for="lastName">Surname:</label>
+                <input type="text" id="lastName" name="lastName" required />
+              </div>
+
+              <div class="input-container">
+                <label for="login">Username:</label>
+                <input type="text" id="login" name="login" required />
+              </div>
+
+              <div class="input-container">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required />
+              </div>
+
+              <div class="input-container">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required />
+              </div>
+            </div>
+        </div>
+        <h1>Contact information</h1>
+        <!-- Sekcja danych adresowo-kontaktowych -->
+        <div class="section">
+          
+            <div class="contact-info">
+              <div class="input-container">
+                <label for="phoneNumber">Phone number:</label>
+                <input
+                  type="tel"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  required
+                />
+              </div>
+
+              <div class="input-container">
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" required />
+              </div>
+
+              <div class="input-container">
+                <label for="postalCode">Zip code:</label>
+                <input type="text" id="postalCode" name="postalCode" required />
+              </div>
+
+              <div class="input-container">
+                <label for="street">Street:</label>
+                <input type="text" id="street" name="street" required />
+              </div>
+
+              <div class="input-container">
+                <label for="apartmentNumber">Apartment number:</label>
+                <input
+                  type="text"
+                  id="apartmentNumber"
+                  name="apartmentNumber"
+                  required
+                />
+              </div>
+
+              <div class="button-container">
+                <button type="submit" class="register-button">
+                  Sing up
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {});
+    </script>
+    <button id="toggleModeButton">Przełącz motyw</button>
+
+    <script src="/js/darkmode.js"></script>
+  </body>
+</html>
