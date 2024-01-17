@@ -1,207 +1,226 @@
 <!DOCTYPE html>
 <html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style6.css" />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Części Samochodowe</title>
-    <link rel="stylesheet" href="/css/style6.css">
-</head>
-
-<body>
-    <header>
-        <h1>Części Samochodowe</h1>
-        <nav class="navbar">
-            <div class="icons">
-              <a href="product-add"
-                ><img src="/img/plus-icon.png" alt="Icon 1"
-              /></a>
-              <a href="cart"
-                ><img src="/img/ic-shopping-cart-24px-1@1x.png" alt="Icon 2"
-              /></a>
-              <a href="profile"
-                ><img src="/img/ic-perm-identity-24px-1@1x.png" alt="Icon 3"
-              /></a>
-            </div>
-          </nav>
-        <div id="filters">
-            <select id="filter-price">
-                <option value="">Cena</option>
-                <!-- Opcje cenowe -->
-            </select>
-            <select id="filter-year">
-                <option value="">Rok produkcji</option>
-                <!-- Opcje roku -->
-            </select>
-            <select id="filter-brand" onchange="updateModels()">
-                <option value="">Marka</option>
-                <option th:each="marka : ${marki}" th:value="${marka.nazwaMarki}" th:text="${marka.nazwaMarki}"></option>
-            </select>
-
-            <select class="custom-select" id="model" name="model" onchange="updateGenerations()">
-                <option value="" disabled selected>Wybierz model</option>
-            </select>
-
-            <select class="custom-select" id="generacja" name="generacja" onchange="onFilterChange()">
-                <option value="" disabled selected>Generacja</option>
-            </select>
-
-            <select id="filter-condition">
-                <option value="">Stan</option>
-                <option value="new">Nowy</option>
-                <option value="used">Używany</option>
-            </select>
-            <select id="filter-type">
-                <option value="">Typ</option>
-                <option value="private">Prywatny</option>
-                <option value="company">Firma</option>
-            </select>
+  <body>
+    <nav class="navbar">
+      <div class="icons">
+        <a href="product-add"><img src="/img/plus-icon.png" alt="Icon 1" /></a>
+        <a href="cart"
+          ><img src="/img/ic-shopping-cart-24px-1@1x.png" alt="Icon 2"
+        /></a>
+        <a href="profile"
+          ><img src="/img/ic-perm-identity-24px-1@1x.png" alt="Icon 3"
+        /></a>
+      </div>
+    </nav>
+    <div class="background-container">
+      <div class="captions">
+        <div class="caption-container">
+          <h1>Znajdź Części Do Swojego Samochodu</h1>
+          <h3>Dziesiątki Marek, tysiące części</h3>
         </div>
-    </header>
-    <table>
+      </div>
+      <div class="container">
+        <form>
+          <div class="input-container">
+            <div class="label-and-select">
+              <label for="brand">Marka:</label>
+              <div class="select-container">
+                <select class="custom-select" id="brand" name="brand">
+                  <option value="" disabled selected>Wybierz markę</option>
+                </select>
+              </div>
+            </div>
+            <div class="label-and-select">
+              <label for="model">Model:</label>
+              <div class="select-container">
+                <select class="custom-select" id="model" name="model">
+                  <option value="" disabled selected>Wybierz model</option>
+                </select>
+              </div>
+            </div>
+            <div class="label-and-select">
+              <label for="year">Generacja:</label>
+              <div class="select-container">
+                <select class="custom-select" id="year" name="year">
+                  <option value="" disabled selected>Generacja</option>
+                </select>
+              </div>
+            </div>
+            <div class="label-and-select">
+              <label for="production-year">Rok produkcji:</label>
+              <div class="select-container">
+                <select
+                  class="custom-select"
+                  id="production-year"
+                  name="production-year"
+                >
+                  <option value="" disabled selected>
+                    Wybierz rok produkcji
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="button" onclick="searchCars()">
+            Szukaj
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="table-container">
+      <table class="part-table">
         <thead>
-            <tr>
-                <th>Zdjęcie</th>
-                <th>Nazwa</th>
-                <th>Cena</th>
-            </tr>
+          <tr>
+            <th>Zdjęcie</th>
+            <th>Nazwa</th>
+            <th>Cena</th>
+          </tr>
         </thead>
         <tbody id="table-body">
-            <!-- Thymeleaf each loop to iterate over the parts -->
-            <tr th:each="part : ${parts}">
-                <td>
-                    <img th:src="'data:image/png;base64,' + ${part.firstImageBase64}" alt="Part Image">
-                </td>
-                <td th:text="${part.title}"></td>
-                <td th:text="${part.price}"></td>
-            </tr>
+          <!-- Thymeleaf each loop to iterate over the parts -->
+          <tr th:each="part : ${parts}">
+            <td>
+              <img
+                th:src="'data:image/png;base64,' + ${part.firstImageBase64}"
+                alt="Part Image"
+              />
+            </td>
+            <td th:text="${part.title}"></td>
+            <td th:text="${part.price}"></td>
+          </tr>
         </tbody>
-    </table>
-
+      </table>
+    </div>
 
     <script th:inline="javascript">
+      window.onload = function () {
+        populateProductionYears();
+      };
 
-        window.onload = function() {
-            populateProductionYears();
+      function getQueryStringParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      }
+
+      const brandFilter = getQueryStringParameter("brand");
+      const modelFilter = getQueryStringParameter("model");
+      const generationFilter = getQueryStringParameter("generation");
+      const productionYearFilter = getQueryStringParameter("productionYear");
+      const priceFilter = getQueryStringParameter("price");
+      const typeFilter = getQueryStringParameter("type");
+      const conditionFilter = getQueryStringParameter("condition");
+
+      if (brandFilter != "" && brandFilter) {
+        document.getElementById("filter-brand").value = brandFilter;
+        updateModels();
+      }
+
+      if (modelFilter != "" && modelFilter) {
+        var modelSelect = document.getElementById("model");
+        for (var i = 0; i < modelSelect.options.length; i++) {
+          if (modelSelect.options[i].value === modelFilter) {
+            modelSelect.selectedIndex = i;
+            break;
+          }
+        }
+        updateGenerations();
+      }
+
+      if (generationFilter != "" && generationFilter) {
+        document.getElementById("generacja").value = generationFilter;
+      }
+
+      if (priceFilter != "" && priceFilter) {
+        document.getElementById("filter-price").value = priceFilter;
+      }
+
+      if (typeFilter != "" && typeFilter) {
+        document.getElementById("filter-type").value = typeFilter;
+      }
+
+      if (conditionFilter != "" && conditionFilter) {
+        document.getElementById("filter-condition").value = conditionFilter;
+      }
+
+      function updateGenerations() {
+        var selectedModel = document.getElementById("model").value;
+        var generations = /*[[${models}]]*/ [];
+
+        var generationDropdown = document.getElementById("generacja");
+        generationDropdown.innerHTML =
+          '<option value="" disabled selected>Generacja</option>';
+
+        for (var i = 0; i < generations.length; i++) {
+          if (generations[i].nazwaModelu === selectedModel) {
+            var option = document.createElement("option");
+            option.value = generations[i].generacja;
+            option.text = generations[i].generacja;
+            generationDropdown.add(option);
+          }
+        }
+      }
+
+      function updateModels() {
+        var selectedBrand = document.getElementById("filter-brand").value;
+        var models = /*[[${models}]]*/ [];
+
+        var modelDropdown = document.getElementById("model");
+        modelDropdown.innerHTML =
+          '<option value="" disabled selected>Wybierz model</option>';
+
+        for (var i = 0; i < models.length; i++) {
+          if (models[i].marka.nazwaMarki === selectedBrand) {
+            var option = document.createElement("option");
+            option.value = models[i].nazwaModelu;
+            option.text = models[i].nazwaModelu;
+            modelDropdown.add(option);
+          }
         }
 
-        function getQueryStringParameter(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
+        // After updating models, also update generations
+        updateGenerations();
+      }
+
+      function onFilterChange() {
+        // Get selected filter values
+        const price = document.getElementById("filter-price").value;
+        const brand = document.getElementById("filter-brand").value;
+        const model = document.getElementById("model").value;
+        const generation = document.getElementById("generacja").value;
+        const productionYear = document.getElementById("filter-year").value;
+        const type = document.getElementById("filter-type").value;
+        const condition = document.getElementById("filter-condition").value;
+
+        // Construct the new URL with filter parameters
+        const newUrl = `/parts-filter?price=${price}&brand=${brand}&model=${model}&generation=${generation}&productionYear=${productionYear}&type=${type}&condition=${condition}`;
+
+        // Redirect to the new URL
+        window.location.href = newUrl;
+      }
+      function populateProductionYears() {
+        var currentYear = new Date().getFullYear();
+        var productionYearDropdown = document.getElementById("filter-year");
+
+        productionYearDropdown.innerHTML =
+          '<option value="">Rok produkcji</option>';
+
+        for (var year = currentYear; year >= 1990; year--) {
+          var option = document.createElement("option");
+          option.value = year;
+          option.text = year;
+          productionYearDropdown.add(option);
         }
 
-        const brandFilter = getQueryStringParameter('brand');
-        const modelFilter = getQueryStringParameter('model');
-        const generationFilter = getQueryStringParameter('generation');
-        const productionYearFilter = getQueryStringParameter('productionYear');
-        const priceFilter = getQueryStringParameter('price');
-        const typeFilter = getQueryStringParameter('type');
-        const conditionFilter = getQueryStringParameter('condition');
-        
-        if (brandFilter!=""&&brandFilter) {
-            document.getElementById('filter-brand').value = brandFilter;
-            updateModels();
+        if (productionYearFilter != "" && productionYearFilter) {
+          productionYearDropdown.value = productionYearFilter;
         }
-
-        if (modelFilter!=""&&modelFilter) {
-            
-            var modelSelect = document.getElementById('model');
-            for (var i = 0; i < modelSelect.options.length; i++) {
-                if (modelSelect.options[i].value === modelFilter) {
-                    modelSelect.selectedIndex = i;
-                    break;
-                }
-            }
-            updateGenerations();
-        }
-
-        if (generationFilter!=""&&generationFilter) {
-            document.getElementById('generacja').value = generationFilter;
-        }
-
-        if (priceFilter!=""&&priceFilter){
-            document.getElementById('filter-price').value = priceFilter;
-        }
-
-        if (typeFilter!=""&&typeFilter){
-            document.getElementById('filter-type').value=typeFilter;
-        }
-
-        if (conditionFilter!=""&&conditionFilter){
-            document.getElementById('filter-condition').value = conditionFilter;
-        }
-
-        function updateGenerations() {
-            var selectedModel = document.getElementById('model').value;
-            var generations = /*[[${models}]]*/ [];
-
-            var generationDropdown = document.getElementById('generacja');
-            generationDropdown.innerHTML = '<option value="" disabled selected>Generacja</option>';
-
-            for (var i = 0; i < generations.length; i++) {
-                if (generations[i].nazwaModelu === selectedModel) {
-                    var option = document.createElement('option');
-                    option.value = generations[i].generacja;
-                    option.text = generations[i].generacja;
-                    generationDropdown.add(option);
-                }
-            }
-        }
-
-        function updateModels() {
-            var selectedBrand = document.getElementById('filter-brand').value;
-            var models = /*[[${models}]]*/ [];
-
-            var modelDropdown = document.getElementById('model');
-            modelDropdown.innerHTML = '<option value="" disabled selected>Wybierz model</option>';
-
-            for (var i = 0; i < models.length; i++) {
-                if (models[i].marka.nazwaMarki === selectedBrand) {
-                    var option = document.createElement('option');
-                    option.value = models[i].nazwaModelu;
-                    option.text = models[i].nazwaModelu;
-                    modelDropdown.add(option);
-                }
-            }
-
-            // After updating models, also update generations
-            updateGenerations();
-        }
-        
-        function onFilterChange() {
-            // Get selected filter values
-            const price = document.getElementById('filter-price').value;
-            const brand = document.getElementById('filter-brand').value;
-            const model = document.getElementById('model').value;
-            const generation = document.getElementById('generacja').value;
-            const productionYear = document.getElementById('filter-year').value;
-            const type = document.getElementById('filter-type').value;
-            const condition = document.getElementById('filter-condition').value;
-
-            // Construct the new URL with filter parameters
-            const newUrl = `/parts-filter?price=${price}&brand=${brand}&model=${model}&generation=${generation}&productionYear=${productionYear}&type=${type}&condition=${condition}`;
-
-            // Redirect to the new URL
-            window.location.href = newUrl;
-        }
-        function populateProductionYears() {
-            var currentYear = new Date().getFullYear();
-            var productionYearDropdown = document.getElementById('filter-year');
-            
-            productionYearDropdown.innerHTML = '<option value="">Rok produkcji</option>';
-            
-            for (var year = currentYear; year >= 1990; year--) {
-                var option = document.createElement('option');
-                option.value = year;
-                option.text = year;
-                productionYearDropdown.add(option);
-            }
-
-            if (productionYearFilter!=""&&productionYearFilter) {
-                productionYearDropdown.value = productionYearFilter;
-            }
-        }
+      }
     </script>
-</body>
-
+  </body>
 </html>
