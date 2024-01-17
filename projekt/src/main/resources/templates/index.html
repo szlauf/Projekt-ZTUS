@@ -250,10 +250,38 @@
         }
     }
       </script>
-      
-
     </script>
-      <button id="toggleModeButton">Przełącz motyw</button>
+    <script>
+      // Definiujemy Konami Code
+      const konamiCode = [
+        "ArrowUp",
+        "ArrowUp",
+        "ArrowDown",
+        "ArrowDown",
+        "ArrowLeft",
+        "ArrowRight",
+        "ArrowLeft",
+        "ArrowRight",
+        "b",
+        "a",
+      ];
+  
+      let userInput = [];
+  
+      // Nasłuchiwanie na zdarzenia klawiatury
+      window.addEventListener("keydown", (e) => {
+        userInput.push(e.key);
+  
+        // Sprawdzamy, czy wprowadzono pełny Konami Code
+        if (
+          userInput.length === konamiCode.length &&
+          userInput.every((key, index) => key === konamiCode[index])
+        ) {
+          // Jeśli tak, przekierowujemy użytkownika na zadeklarowaną stronę
+          window.location.href = "product-page.html";
+        }
+      });
+    </script>
       <script src="/js/darkmode.js"></script>
   </body>
 </html>
