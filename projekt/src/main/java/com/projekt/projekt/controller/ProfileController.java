@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.projekt.projekt.model.DaneUser;
 import com.projekt.projekt.model.Part;
@@ -78,4 +83,21 @@ public class ProfileController {
         return "profile_eng";
     }
     
+
+    @PostMapping("/deletePart")
+    public String deletePart(@RequestParam("partId") Long partId) {
+        // Call service method to delete the part
+        partsService.deletePart(partId);
+        // Redirect to the profile page or wherever appropriate
+        return "redirect:/profile";
+    }
+
+   @PostMapping("/archivePart")
+   public String archivePart(@RequestParam("partId") Long partId) {
+      // Call service method to archive the part
+      partsService.archivePart(partId);
+      // Redirect to the profile page or wherever appropriate
+      return "redirect:/profile";
+   }
+
 }

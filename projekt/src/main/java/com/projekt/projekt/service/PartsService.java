@@ -92,5 +92,19 @@ public class PartsService {
     public Part getPartById(Integer id){
         return partsRepository.findById(id);
     }
+
+    public void deletePart(Long partId) {
+        // Implement logic to delete the part by ID
+        partsRepository.deleteById(partId);
+     }
+  
+     public void archivePart(Long partId) {
+        // Implement logic to archive the part by updating the 'isArchived' field
+        Part part = partsRepository.findById(partId).orElse(null);
+        if (part != null) {
+           part.setIsArchived(true);
+           partsRepository.save(part);
+        }
+     }
 }
 

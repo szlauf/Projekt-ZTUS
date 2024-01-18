@@ -113,6 +113,7 @@ form input[type="file"] {
   margin-top: 20px;
 }
 .button1 {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
