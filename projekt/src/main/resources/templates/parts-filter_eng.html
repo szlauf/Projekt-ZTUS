@@ -3,18 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/style6.css" id="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="/css/style6DarkMode.css"
-      id="darkModeStylesheet"
-      disabled
-    />
+    <link rel="stylesheet" href="/css/style6.css" />
   </head>
 
   <body>
     <nav class="navbar">
-      <button id="toggleModeButton">Przełącz motyw</button>
+      <button id="toggleModeButton">Change theme</button>
       <div class="icons">
         <a href="product-add"><img src="/img/plus-icon.png" alt="Icon 1" /></a>
         <a href="cart"
@@ -28,15 +22,15 @@
     <div class="background-container">
       <div class="captions">
         <div class="caption-container">
-          <h1>Znajdź Części Do Swojego Samochodu</h1>
-          <h3>Dziesiątki Marek, tysiące części</h3>
+          <h1>Find Parts for Your Car</h1>
+          <h3>Dozens of Brands, thousands of parts</h3>
         </div>
       </div>
       <div class="container">
         <form>
           <div class="input-container">
             <div class="label-and-select">
-              <label for="brand">Marka:</label>
+              <label for="brand">Brand:</label>
               <div class="select-container">
                 <select
                   class="custom-select"
@@ -44,7 +38,7 @@
                   name="brand"
                   onchange="updateModels()"
                 >
-                  <option value="" selected>Wybierz markę</option>
+                  <option value="" selected>Select brand</option>
                   <option
                     th:each="marka : ${marki}"
                     th:value="${marka.nazwaMarki}"
@@ -62,33 +56,33 @@
                   name="model"
                   onchange="updateGenerations()"
                 >
-                  <option value="" selected>Wybierz model</option>
+                  <option value="" selected>Select model</option>
                 </select>
               </div>
             </div>
             <div class="label-and-select">
-              <label for="year">Generacja:</label>
+              <label for="year">Generation:</label>
               <div class="select-container">
                 <select class="custom-select" id="year" name="year">
-                  <option value="" selected>Generacja</option>
+                  <option value="" selected>Selecet generation</option>
                 </select>
               </div>
             </div>
             <div class="label-and-select">
-              <label for="production-year">Rok produkcji:</label>
+              <label for="production-year">Production year:</label>
               <div class="select-container">
                 <select
                   class="custom-select"
                   id="production-year"
                   name="production-year"
                 >
-                  <option value="" selected>Wybierz rok produkcji</option>
+                  <option value="" selected>Select productin year</option>
                 </select>
               </div>
             </div>
           </div>
           <button type="button" class="button" onclick="onFilterChange()">
-            Szukaj
+            Browse
           </button>
         </form>
       </div>
@@ -97,9 +91,9 @@
       <table class="part-table">
         <thead>
           <tr>
-            <th>Zdjęcie</th>
-            <th>Nazwa</th>
-            <th>Cena</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
           </tr>
         </thead>
         <tbody id="table-body">
@@ -238,11 +232,10 @@
         });
       });
     </script>
-    <script src="/js/darkmode.js"></script>
     <script>
       function loadNewContent() {
         // Przekierowanie do innego pliku HTML
-        window.location.href = "parts-filter_eng";
+        window.location.href = "parts-filter";
       }
     </script>
     <button onclick="loadNewContent()">Załaduj inny plik HTML</button>
