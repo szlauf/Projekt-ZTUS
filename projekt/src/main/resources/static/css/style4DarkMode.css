@@ -28,7 +28,7 @@ body {
 
 #toggleModeButton {
   margin-right: 30px;
-  background-color: white;
+  background-color: rgb(92, 92, 92);
   color: black;
   border: 2px solid black;
   padding: 5px 10px;
@@ -397,7 +397,7 @@ select:hover {
 
 .product-container {
   margin-left: 40%;
-  border: 1px solid #255a26;
+  border: 1px solid #333333;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
@@ -418,7 +418,7 @@ select:hover {
   margin-bottom: 10px;
   height: 500px;
   width: 50%;
-  background-color: #fff;
+  background-color: #515151;
 }
 .title {
   font-size: 50px;
@@ -438,7 +438,7 @@ select:hover {
 }
 .product-description h3 {
   font-size: 28px;
-  color: black;
+  color: rgb(190, 190, 190);
 }
 
 .product-description {
@@ -467,13 +467,13 @@ select:hover {
 }
 
 .seller-info {
-  background-color: #fff;
+  background-color: #515151;
   align-items: left;
   display: flex;
   flex-direction: column;
   margin-top: 100px;
   margin-right: 15%;
-  border: 1px solid #255a26;
+  border: 1px solid #303030;
   padding: 20px;
   float: right;
   width: 15%;
@@ -514,11 +514,12 @@ select:hover {
 
 .contact-button2 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  color: #255a26;
+  color: #fff;
   width: 100%;
   height: 50px;
   font-size: 20px;
   margin-top: 5%;
+  background-color: #484848;
   border: 3px solid #255a26;
 }
 .contact-button3 {

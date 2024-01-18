@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TurboWorks</title>
+    <link rel="stylesheet" href="/css/style4.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="icons">
+        <a href="#"><img src="/img/ic-search-24px-1@1x.png" alt="Icon 1" /></a>
+        <a href="#"
+          ><img src="/img/ic-shopping-cart-24px-1@1x.png" alt="Icon 2"
+        /></a>
+        <a href="#"
+          ><img src="/img/ic-perm-identity-24px-1@1x.png" alt="Icon 3"
+        /></a>
+      </div>
+    </nav>
+    <div class="background-container">
+      <div class="captions">
+        <div class="caption-container">
+          <h1>Znajdź Części Do Swojego Samochodu</h1>
+          <h3>Dziesiątki Marek, tysiące części</h3>
+        </div>
+      </div>
+      <div class="container">
+        <form>
+          <div class="input-container">
+            <div class="label-and-select">
+              <label for="brand">Marka:</label>
+              <div class="select-container">
+                <select class="custom-select" id="brand" name="brand" onchange="updateModels()">
+                  <option value="" disabled selected>Wybierz markę</option>
+                  <option th:each="marka : ${marki}" th:value="${marka.nazwaMarki}" th:text="${marka.nazwaMarki}"></option>
+                </select>
+              </div>
+            </div>
+            <div class="label-and-select">
+              <label for="model">Model:</label>
+              <div class="select-container">
+                <select class="custom-select" id="model" name="model" onchange="updateGenerations()">
+                  <option value="" disabled selected>Wybierz model</option>
+                </select>
+              </div>
+            </div>
+            <div class="label-and-select">
+              <label for="year">Generacja:</label>
+              <div class="select-container">
+                <select class="custom-select" id="year" name="year">
+                  <option value="" disabled selected>Generacja</option>
+                </select>
+              </div>
+            </div>
+            <div class="label-and-select">
+              <label for="production-year">Rok produkcji:</label>
+              <div class="select-container">
+                <select class="custom-select" id="production-year" name="production-year">
+                  <option value="" disabled selected>Wybierz rok produkcji</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="button" onclick="searchCars()">
+            Szukaj
+          </button>
+        </form>
+        </div>
+    </div>
+    <div class="categories-container">
+      <div class="categories-header-container">
+        <h2 class="categories-header">Przeglądaj Kategorie</h2>
+      </div>
+      <div class="categories-grid">
+        <div class="category">
+          <a href="#"><img src="/img/Qiyana.png" alt="Silnik" /></a>
+          <button class="button1">Silnik</button>
+        </div>
+        <div class="category">
+          <a href="#"><img src="/img/Qiyana.png" alt="Felgi" /></a>
+          <button class="button1">Felgi</button>
+        </div>
+        <div class="category">
+          <a href="#"><img src="/img/Qiyana.png" alt="Opony" /></a>
+          <button class="button1">Opony</button>
+        </div>
+        <div class="category">
+          <a href="#"><img src="/img/Qiyana.png" alt="Karoseria" /></a>
+          <button class="button1">Karoseria</button>
+        </div>
+        <div class="category">
+          <a href="#"><img src="/img/Qiyana.png" alt="Oświetlenie" /></a>
+          <button class="button1">Oświetlenie</button>
+        </div>
+        <div class="category">
+          <a href="#"><img src="/img/Qiyana.png" alt="Wnętrze" /></a>
+          <button class="button1">Wnętrze</button>
+        </div>
+      </div>
+    </div>
+    <script src="/js/script.js"></script>
+    <script th:inline="javascript">
+      function updateGenerations() {
+          var selectedModel = document.getElementById('model').value;
+          var generations = /*[[${models}]]*/ [];
+  
+          var generationDropdown = document.getElementById('year');
+          generationDropdown.innerHTML = '<option value="" disabled selected>Generacja</option>';
+  
+          for (var i = 0; i < generations.length; i++) {
+              if (generations[i].nazwaModelu === selectedModel) {
+                  var option = document.createElement('option');
+                  option.value = generations[i].generacja;
+                  option.text = generations[i].generacja;
+                  generationDropdown.add(option);
+              }
+          }
+      }
+  
+      function updateModels() {
+          var selectedBrand = document.getElementById('brand').value;
+          var models = /*[[${models}]]*/ [];
+  
+          var modelDropdown = document.getElementById('model');
+          modelDropdown.innerHTML = '<option value="" disabled selected>Wybierz model</option>';
+  
+          for (var i = 0; i < models.length; i++) {
+              if (models[i].marka.nazwaMarki === selectedBrand) {
+                  var option = document.createElement('option');
+                  option.value = models[i].nazwaModelu;
+                  option.text = models[i].nazwaModelu;
+                  modelDropdown.add(option);
+              }
+          }
+  
+          // After updating models, also update generations
+          updateGenerations();
+      }
+  </script>
+  </body>
+</html>
