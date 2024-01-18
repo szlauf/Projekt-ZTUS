@@ -49,6 +49,7 @@ public class ProfileController {
         List<Part> parts = partsService.getUserParts(user);
         List<UserOrders> userOrders = userOrdersRepository.findByIdUser(user.getId());
         List<Part> orders = new ArrayList<>();
+        List<Part> archive = partsService.getUserArchive(user);
 
         for (UserOrders userOrder : userOrders) {
             orders.add(partsService.getUserOrders(userOrder.getIdOgloszenie()));
@@ -57,6 +58,7 @@ public class ProfileController {
         model.addAttribute("daneUser", daneUser);
         model.addAttribute("parts", parts);
         model.addAttribute("orders", orders);
+        model.addAttribute("archive", archive);
         // Zwracanie nazwy widoku (szablonu) o nazwie "profile"
         return "profile";
     }
@@ -96,6 +98,14 @@ public class ProfileController {
    public String archivePart(@RequestParam("partId") Long partId) {
       // Call service method to archive the part
       partsService.archivePart(partId);
+      // Redirect to the profile page or wherever appropriate
+      return "redirect:/profile";
+   }
+
+   @PostMapping("/unArchivePart")
+   public String unArchivePart(@RequestParam("partId") Long partId) {
+      // Call service method to archive the part
+      partsService.unArchivePart(partId);
       // Redirect to the profile page or wherever appropriate
       return "redirect:/profile";
    }
