@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Strona logowania</title>
+    <title>Login Page</title>
     <link rel="stylesheet" href="/css/style.css" id="stylesheet" />
     <link
       rel="stylesheet"
@@ -23,7 +23,10 @@
 
   <body>
     <nav class="navbar">
-      <button id="toggleModeButton">Przełącz motyw</button>
+      <button id="toggleLangButton" onclick="loadNewContent()">
+        Change Language
+      </button>
+      <button id="toggleModeButton">Change Theme</button>
       <div class="icons">
         <a href=""><img src="/img/ic-search-24px-1@1x.png" alt="Icon 1" /></a>
         <a href=""
@@ -90,7 +93,7 @@
             <div th:if="${param.captchaError}" class="input-container">
               Captcha verification is required!
             </div>
-            <button class="login-button" type="submit">Zaloguj się</button>
+            <button class="login-button" type="submit">Log in</button>
           </form>
         </div>
         <div class="link-container">
@@ -99,7 +102,7 @@
           </div>
           <hr class="line" />
           <div class="register-link">
-            Nie masz konta? <a href="registration">Sign up</a>
+            Don't have an account? <a href="registration">Sign up</a>
           </div>
         </div>
       </div>
@@ -140,6 +143,5 @@
         window.location.href = "login";
       }
     </script>
-    <button onclick="loadNewContent()">Załaduj inny plik HTML</button>
   </body>
 </html>
