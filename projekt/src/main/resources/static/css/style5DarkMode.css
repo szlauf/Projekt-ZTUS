@@ -6,7 +6,7 @@
 
 body {
   font-family: "Lato", sans-serif;
-  background-color: #353535;
+  background-color: rgb(41, 38, 38);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,21 +14,29 @@ body {
   margin: 0;
 }
 
+h1 {
+  color: rgb(199, 199, 199);
+}
+h2 {
+  color: rgb(199, 199, 199);
+}
+
 .navbar {
-  background-color: #2f2f2f;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  background-color: #2a2a2a;
+  border-top: 1px solid rgb(60, 60, 60);
+  border-bottom: 1px solid rgb(60, 60, 60);
   display: flex;
   justify-content: flex-end;
   align-items: center;
   height: 60px;
   width: 100%;
-  box-shadow: 0 4px 6px rgba(116, 115, 115, 0.1);
+  box-shadow: 0 4px 6px rgb(60, 60, 60);
 }
+
 #toggleModeButton {
   margin-right: 30px;
-  background-color: #353535;
-  color: #e8e8e8;
+  background-color: rgb(92, 92, 92);
+  color: black;
   border: 2px solid black;
   padding: 5px 10px;
   font-size: 16px;
@@ -48,7 +56,7 @@ body {
 .icons a {
   text-decoration: none;
   margin-right: 30px;
-  color: black;
+  color: rgb(166, 166, 166);
   transition: color 0.3s ease;
 }
 
@@ -85,9 +93,9 @@ body {
 .small-section {
   width: 100%; /* Rozciągnięcie kafelków na pełną szerokość */
   padding: 20px;
-  background-color: #2f2f2f;
+  background-color: #474747;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(116, 116, 116, 0.1);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .profile-section h1 {
@@ -105,13 +113,29 @@ body {
 .announcement p {
   font-family: "Lato", sans-serif;
   font-size: 18px;
-  color: #e8e8e8;
+  color: rgb(199, 199, 199);
   margin-bottom: 10px;
 }
 
 .order,
 .announcement {
   margin-bottom: 20px;
+}
+
+.button {
+  width: 30%;
+  height: 50px;
+  font-size: 23px;
+  background-color: #4caf50;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 @media (max-width: 1920px) {
@@ -153,9 +177,87 @@ body {
     max-width: none;
   }
 }
-h1 {
-  color: #bbbbbb;
+
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-h2 {
-  color: #bbbbbb;
+.part-table {
+  justify-content: center;
+  margin-top: 5%;
+  position: relative;
+  width: 80%;
+  border-collapse: separate;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.part-table th,
+.part-table td {
+  padding: 1rem;
+  text-align: left;
+  vertical-align: middle;
+  border: 1px solid #ccc;
+}
+
+.part-table th {
+  position: relative;
+  background-color: #f2f2f2;
+  font-weight: 500;
+}
+
+.part-table th::before,
+.part-table th::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  width: 100%;
+  height: 2px;
+  background-color: #343a40;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.part-table th::before {
+  left: 0;
+}
+
+.part-table th::after {
+  right: 0;
+  background-color: white;
+}
+
+.part-table th:hover::before,
+.part-table th:hover::after {
+  opacity: 1;
+}
+
+.part-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.part-table tr:last-child td {
+  border-bottom: none;
+}
+
+.part-table td:first-child img {
+  width: 100px;
+  height: auto;
+  margin-right: 1rem;
+}
+
+.part-table tr:hover {
+  border: 1px solid #4caf50;
+}
+
+@media screen and (max-width: 767px) {
+  .part-table th,
+  .part-table td {
+    padding: 0.5rem;
+  }
+
+  .part-table td:first-child img {
+    width: 50px;
+  }
 }
