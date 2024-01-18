@@ -25,20 +25,6 @@ body {
   width: 100%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-#toggleModeButton {
-  margin-right: 30px;
-  background-color: white;
-  color: black;
-  border: 2px solid black;
-  padding: 5px 10px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-#toggleModeButton:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-}
 
 .icons {
   display: flex;
@@ -112,6 +98,22 @@ body {
 .order,
 .announcement {
   margin-bottom: 20px;
+}
+
+.button {
+  width: 30%;
+  height: 50px;
+  font-size: 23px;
+  background-color: #4caf50;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 @media (max-width: 1920px) {

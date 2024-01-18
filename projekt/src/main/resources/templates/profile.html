@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profil Użytkownika</title>
-    <link rel="stylesheet" href="/css/style5.css" id="stylesheet" />
+    <link rel="stylesheet" href="css/style5.css" id="stylesheet" />
     <link
       rel="stylesheet"
       href="/css/style5DarkMode.css"
@@ -38,12 +38,30 @@
         <div class="section profile-section">
           <h1>Moje Dane</h1>
           <div class="user-info">
-            <p><strong>Imię:</strong> <span th:text="${daneUser.imie}"></span></p>
-            <p><strong>Nazwisko:</strong> <span th:text="${daneUser.nazwisko}"></span></p>
-            <p><strong>Nazwa Użytkownika:</strong> <span th:text="${user.login}"></span></p>
-            <p><strong>Email:</strong> <span th:text="${daneUser.email}"></span></p>
-            <p><strong>Numer telefonu:</strong> <span th:text="${daneUser.nrTelefonu}"></span></p>
-            <p><strong>Adres:</strong> <span th:text="${daneUser.kodPocztowy + ' ' + daneUser.miasto + ' ' + daneUser.ulica + ' ' + daneUser.nrMieszkania}"></span></p>
+            <p>
+              <strong>Imię:</strong> <span th:text="${daneUser.imie}"></span>
+            </p>
+            <p>
+              <strong>Nazwisko:</strong>
+              <span th:text="${daneUser.nazwisko}"></span>
+            </p>
+            <p>
+              <strong>Nazwa Użytkownika:</strong>
+              <span th:text="${user.login}"></span>
+            </p>
+            <p>
+              <strong>Email:</strong> <span th:text="${daneUser.email}"></span>
+            </p>
+            <p>
+              <strong>Numer telefonu:</strong>
+              <span th:text="${daneUser.nrTelefonu}"></span>
+            </p>
+            <p>
+              <strong>Adres:</strong>
+              <span
+                th:text="${daneUser.kodPocztowy + ' ' + daneUser.miasto + ' ' + daneUser.ulica + ' ' + daneUser.nrMieszkania}"
+              ></span>
+            </p>
           </div>
         </div>
       </div>
@@ -55,12 +73,18 @@
             <div class="table-container">
               <table class="part-table">
                 <tbody id="order">
-                    <tr th:each="order : ${orders}" th:attr="data-part-id=${order.id}">
-                        <td>
-                            <img th:src="'data:image/png;base64,' + ${order.firstImageBase64}" alt="Part Image">
-                        </td>
-                        <td th:text="${order.title}"></td>
-                    </tr>
+                  <tr
+                    th:each="order : ${orders}"
+                    th:attr="data-part-id=${order.id}"
+                  >
+                    <td>
+                      <img
+                        th:src="'data:image/png;base64,' + ${order.firstImageBase64}"
+                        alt="Part Image"
+                      />
+                    </td>
+                    <td th:text="${order.title}"></td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -73,13 +97,23 @@
             <div class="table-container">
               <table class="part-table">
                 <tbody id="announcements">
-                    <!-- Thymeleaf each loop to iterate over the parts -->
-                    <tr th:each="part : ${parts}" th:attr="data-part-id=${part.id}">
-                        <td>
-                            <img th:src="'data:image/png;base64,' + ${part.firstImageBase64}" alt="Part Image">
-                        </td>
-                        <td th:text="${part.title}"></td>
-                    </tr>
+                  <!-- Thymeleaf each loop to iterate over the parts -->
+                  <tr
+                    th:each="part : ${parts}"
+                    th:attr="data-part-id=${part.id}"
+                  >
+                    <td>
+                      <img
+                        th:src="'data:image/png;base64,' + ${part.firstImageBase64}"
+                        alt="Part Image"
+                      />
+                    </td>
+                    <td>
+                      <button class="button">Usuń</button>
+                      <button class="button">Archiwizuj</button>
+                    </td>
+                    <td th:text="${part.title}"></td>
+                  </tr>
                 </tbody>
               </table>
             </div>
