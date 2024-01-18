@@ -4,7 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TurboBay</title>
-    <link rel="stylesheet" href="/css/style4.css" />
+    <link rel="stylesheet" href="/css/style4.css" id="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="/css/style4DarkMode.css"
+      id="darkModeStylesheet"
+      disabled
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,7 +32,10 @@
   </head>
   <body>
     <nav class="navbar">
-      <button id="toggleModeButton">Przełącz motyw</button>
+      <button id="toggleLangButton" onclick="loadNewContent()">
+        Change Language
+      </button>
+      <button id="toggleModeButton">Change Theme</button>
       <div class="icons">
         <a href="product-add"><img src="/img/plus-icon.png" alt="Icon 1" /></a>
         <a href="index"
@@ -91,5 +100,4 @@
       window.location.href = "product-page";
     }
   </script>
-  <button onclick="loadNewContent()">Załaduj inny plik HTML</button>
 </html>

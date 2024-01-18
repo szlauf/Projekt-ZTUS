@@ -4,7 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profil Użytkownika</title>
-    <link rel="stylesheet" href="/css/style5.css" />
+    <link rel="stylesheet" href="css/style5.css" id="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="/css/style5DarkMode.css"
+      id="darkModeStylesheet"
+      disabled
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;700;900&display=swap"
       rel="stylesheet"
@@ -12,7 +18,10 @@
   </head>
   <body>
     <nav class="navbar">
-      <button id="toggleModeButton">Przełącz motyw</button>
+      <button id="toggleLangButton" onclick="loadNewContent()">
+        Change Language
+      </button>
+      <button id="toggleModeButton">Change Theme</button>
       <div class="icons">
         <a href="product-add"><img src="/img/plus-icon.png" alt="Icon 1" /></a>
         <a href="index"
@@ -150,12 +159,12 @@
         // Dodaj obsługę zdarzeń lub inne funkcje JavaScript, jeśli są potrzebne
       });
     </script>
+    <script src="/js/darkmode.js"></script>
     <script>
       function loadNewContent() {
         // Przekierowanie do innego pliku HTML
         window.location.href = "profile";
       }
     </script>
-    <button onclick="loadNewContent()">Załaduj inny plik HTML</button>
   </body>
 </html>

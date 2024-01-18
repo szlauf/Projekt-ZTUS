@@ -4,11 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add offer - Car Parts</title>
-    <link rel="stylesheet" href="/css/style8.css" />
+    <link rel="stylesheet" href="/css/style8.css" id="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="/css/style8DarkMode.css"
+      id="darkModeStylesheet"
+      disabled
+    />
   </head>
   <body>
     <nav class="navbar">
-      <button id="toggleModeButton">Przełącz motyw</button>
+      <button id="toggleLangButton" onclick="loadNewContent()">
+        Change language
+      </button>
+      <button id="toggleModeButton">Change Theme</button>
       <div class="icons">
         <a href="product-add"><img src="/img/plus-icon.png" alt="Icon 1" /></a>
         <a href="index"
@@ -26,16 +35,19 @@
     <main>
       <div class="content-container">
         <div class="adding">
-          <h1>Add offer - Car Parts</h1>
+          <h1>Add offer - Car parts</h1>
           <form
-            action="https://example.com/api/add-ad"
+            action="/process-product-add"
             method="post"
             enctype="multipart/form-data"
           >
-            <label for="title">Offer name:</label>
+            <label for="title">Name:</label>
             <input type="text" id="title" name="title" required />
 
-            <label for="image">Photo:</label>
+            <label for="title">Price:</label>
+            <input type="text" id="price" name="price" required />
+
+            <label for="image">Image:</label>
             <input
               type="file"
               id="image"
@@ -52,21 +64,141 @@
               cols="50"
               required
             ></textarea>
+          
+            <div class="input-container">
+              <div class="label-and-select">
+                <label for="brand">Brand:</label>
+                <div class="select-container">
+                  <select
+                    class="custom-select"
+                    id="brand"
+                    name="brand"
+                    onchange="updateModels()"
+                  >
+                    <option value="" disabled selected>Select brand</option>
+                    <option
+                      th:each="marka : ${marki}"
+                      th:value="${marka.nazwaMarki}"
+                      th:text="${marka.nazwaMarki}"
+                    ></option>
+                  </select>
+                </div>
+              </div>
+              <div class="label-and-select">
+                <label for="model">Model:</label>
+                <div class="select-container">
+                  <select
+                    class="custom-select"
+                    id="model"
+                    name="model"
+                    onchange="updateGenerations()"
+                  >
+                    <option value="" disabled selected>Select model</option>
+                  </select>
+                </div>
+              </div>
+              <div class="label-and-select">
+                <label for="year">Generation:</label>
+                <div class="select-container">
+                  <select class="custom-select" id="year" name="year">
+                    <option value="" disabled selected>Select generation</option>
+                  </select>
+                </div>
+              </div>
+              <div class="label-and-select">
+                <label for="production-year">Production year:</label>
+                <div class="select-container">
+                  <select
+                    class="custom-select"
+                    id="production-year"
+                    name="production-year"
+                  >
+                    <option value="" disabled selected>
+                      Select production year
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
             <button class="button1">Add offer</button>
-          </form>
-        </div>
+            </div> 
+          
+        </form>
       </div>
+      <script th:inline="javascript">
+        function updateGenerations() {
+          var selectedModel = document.getElementById("model").value;
+          var generations = /*[[${models}]]*/ [];
+  
+          var generationDropdown = document.getElementById("year");
+          generationDropdown.innerHTML =
+            '<option value="" disabled selected>Generacja</option>';
+  
+          for (var i = 0; i < generations.length; i++) {
+            if (generations[i].nazwaModelu === selectedModel) {
+              var option = document.createElement("option");
+              option.value = generations[i].generacja;
+              option.text = generations[i].generacja;
+              generationDropdown.add(option);
+            }
+          }
+        }
+  
+        function updateModels() {
+          var selectedBrand = document.getElementById("brand").value;
+          var models = /*[[${models}]]*/ [];
+  
+          var modelDropdown = document.getElementById("model");
+          modelDropdown.innerHTML =
+            '<option value="" disabled selected>Wybierz model</option>';
+  
+          for (var i = 0; i < models.length; i++) {
+            if (models[i].marka.nazwaMarki === selectedBrand) {
+              var option = document.createElement("option");
+              option.value = models[i].nazwaModelu;
+              option.text = models[i].nazwaModelu;
+              modelDropdown.add(option);
+            }
+          }
+  
+          // After updating models, also update generations
+          updateGenerations();
+        }
+    </script>
+    <script th:inline="javascript">
+      
+      window.onload = function() {
+          populateProductionYears();
+      }
+    
+      function populateProductionYears() {
+          var currentYear = new Date().getFullYear();
+          var productionYearDropdown = document.getElementById('production-year');
+          
+          productionYearDropdown.innerHTML = '<option value="" disabled selected>Wybierz rok produkcji</option>';
+          
+          for (var year = currentYear; year >= 1990; year--) {
+              var option = document.createElement('option');
+              option.value = year;
+              option.text = year;
+              productionYearDropdown.add(option);
+          }
+      }
+  
+      </script>
+  
+      <script src="/js/darkmode.js"></script>
       <script>
         function loadNewContent() {
           // Przekierowanie do innego pliku HTML
           window.location.href = "product-add";
         }
       </script>
-      <button onclick="loadNewContent()">Załaduj inny plik HTML</button>
     </main>
 
     <footer>
-      <p>&copy; TurboBay. Wszelkie prawa zastrzeżone.</p>
+      <p>&copy; TurboBay. All rights reserved.</p>
     </footer>
-  </body>
+
+    </body>
 </html>

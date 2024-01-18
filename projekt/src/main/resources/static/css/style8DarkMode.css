@@ -21,6 +21,20 @@ body {
   width: 100%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+#toggleLangButton {
+  margin-right: 30px;
+  background-color: rgb(92, 92, 92);
+  color: black;
+  border: 2px solid black;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#toggleModeButton:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
 
 #toggleModeButton {
   margin-right: 30px;
