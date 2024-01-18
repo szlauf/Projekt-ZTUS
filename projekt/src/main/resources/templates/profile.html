@@ -134,14 +134,14 @@
           </div>
         </div>
         <div class="section small-section">
-          <h2>Moje Ogłoszenia</h2>
+          <h2>Archiwum</h2>
           <div class="announcements">
             <div class="table-container">
               <table class="part-table">
                 <tbody id="announcements">
                   <!-- Thymeleaf each loop to iterate over the parts -->
                   <tr
-                    th:each="part : ${parts}"
+                    th:each="part : ${archive}"
                     th:attr="data-part-id=${part.id}"
                   >
                     <td>
@@ -160,7 +160,7 @@
                         />
                         <button class="button" type="submit">Usuń</button>
                       </form>
-                      <form th:action="@{/archivePart}" method="post">
+                      <form th:action="@{/unArchivePart}" method="post">
                         <input
                           type="hidden"
                           name="partId"

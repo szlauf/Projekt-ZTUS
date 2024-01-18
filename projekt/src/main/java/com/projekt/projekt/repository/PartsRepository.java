@@ -24,4 +24,6 @@ public interface PartsRepository extends JpaRepository<Part, Long> {
     List<Part> findByModel(Model model);
     List<Part> findByCarProductionYear(Integer productionYear);
     List<Part> findAll(Specification<Part> specification);
+    List<Part> findByIsArchivedFalse();
+    List<Part> findByUserAndIsArchived(User user, boolean b);
 }
