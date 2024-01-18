@@ -4,10 +4,11 @@ body {
   line-height: 1.5;
   margin: 0;
   padding: 0;
+  background-color: rgb(41, 38, 38);
 }
 
 .navbar {
-  background-color: white;
+  background-color: #2a2a2a;
   border-top: 1px solid rgb(60, 60, 60);
   border-bottom: 1px solid rgb(60, 60, 60);
   display: flex;
@@ -18,9 +19,17 @@ body {
   box-shadow: 0 4px 6px rgb(60, 60, 60);
 }
 
+h1 {
+  color: #adadad;
+}
+
+h2 {
+  color: #adadad;
+}
+
 #toggleLangButton {
   margin-right: 30px;
-  background-color: white;
+  background-color: rgb(92, 92, 92);
   color: black;
   border: 2px solid black;
   padding: 5px 10px;
@@ -35,7 +44,7 @@ body {
 
 #toggleModeButton {
   margin-right: 30px;
-  background-color: white;
+  background-color: rgb(92, 92, 92);
   color: black;
   border: 2px solid black;
   padding: 5px 10px;
@@ -67,6 +76,7 @@ main {
 section {
   flex-basis: calc(33.333% - 2rem);
   margin: 1rem;
+  color: #adadad;
 }
 
 section h2 {
@@ -83,12 +93,15 @@ form {
 
 form label {
   margin-bottom: 0.5rem;
+  color: #adadad;
 }
 
 form input,
 form textarea {
   margin-bottom: 1rem;
   padding: 0.5rem;
+  border: #040404;
+  background-color: #727171;
 }
 
 form button {

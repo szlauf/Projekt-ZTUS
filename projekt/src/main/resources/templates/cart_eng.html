@@ -4,7 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TurboBay</title>
-    <link rel="stylesheet" href="/css/style4.css" />
+    <link rel="stylesheet" href="/css/style4.css" id="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="/css/style4DarkMode.css"
+      id="darkModeStylesheet"
+      disabled
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,7 +20,10 @@
   </head>
   <body>
     <nav class="navbar">
-      <button id="toggleModeButton">Przełącz motyw</button>
+      <button id="toggleLangButton" onclick="loadNewContent()">
+        Change Language
+      </button>
+      <button id="toggleModeButton">Change Theme</button>
       <div class="icons">
         <a href="product-add"><img src="/img/plus-icon.png" alt="Icon 1" /></a>
         <a href="index"
@@ -35,9 +44,9 @@
           <table class="part-table">
             <thead>
               <tr>
-                <th>Zdjęcie</th>
-                <th>Nazwa</th>
-                <th>Cena</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
               </tr>
             </thead>
             <tbody id="table-body">
@@ -63,12 +72,12 @@
         <a href="#" class="order-button">Place Order</a>
       </div>
     </div>
+    <script src="/js/darkmode.js"></script>
     <script>
       function loadNewContent() {
         // Przekierowanie do innego pliku HTML
         window.location.href = "cart";
       }
     </script>
-    <button onclick="loadNewContent()">Załaduj inny plik HTML</button>
   </body>
 </html>

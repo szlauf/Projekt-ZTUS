@@ -3,15 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/ccc/style7.css" />
+    <link rel="stylesheet" href="/css/style7.css" id="stylesheet"/>
+    <link
+      rel="stylesheet"
+      href="/css/style7DarkMode.css"
+      id="darkModeStylesheet"
+      disabled
+    />
     <title>Kontakt</title>
   </head>
   <body>
     <nav class="navbar">
+      <button id="toggleLangButton" onclick="loadNewContent()">
+        Przełącz język
+      </button>
       <button id="toggleModeButton">Przełącz motyw</button>
       <div class="icons">
         <a href="product-add"
-          ><img src="/mvnw.cmd" alt="Icon 1"
+          ><img src="/img/plus-icon.png" alt="Icon 1"
         /></a>
         <a href="index"
           ><img src="/img/ic-search-24px-1@1x.png" alt="Icon 1"
@@ -75,5 +84,12 @@
     <footer>
       <p>&copy; TurboBay. Wszelkie prawa zastrzeżone.</p>
     </footer>
+    <script src="/js/darkmode.js"></script>
+    <script>
+      function loadNewContent() {
+        // Przekierowanie do innego pliku HTML
+        window.location.href = "contact_eng";
+      }
+    </script>
   </body>
 </html>

@@ -26,6 +26,21 @@ body {
   box-shadow: 0 4px 6px rgb(60, 60, 60);
 }
 
+#toggleLangButton {
+  margin-right: 30px;
+  background-color: rgb(92, 92, 92);
+  color: black;
+  border: 2px solid black;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#toggleModeButton:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 #toggleModeButton {
   margin-right: 30px;
   background-color: rgb(92, 92, 92);
@@ -40,6 +55,7 @@ body {
 #toggleModeButton:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
+
 .icons {
   display: flex;
   align-items: center;
@@ -401,6 +417,7 @@ select:hover {
   align-items: left;
   border: 1px solid #333;
   background-color: #202020;
+  color: #b7b7b7;
   width: 50%;
   margin-top: 10%;
 }
@@ -424,6 +441,7 @@ select:hover {
   margin-top: 20%;
   background-color: #202020;
   border: 1px solid #333;
+  color: #b7b7b7;
   padding: 20px;
   width: 25%; /* Zmiana szerokości */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
