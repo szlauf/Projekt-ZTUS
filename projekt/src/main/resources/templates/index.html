@@ -22,9 +22,7 @@
     <nav class="navbar">
       <button id="toggleModeButton">Przełącz motyw</button>
       <div class="icons">
-        <a href="product-add"
-          ><img src="/img/plus-icon.png" alt="Icon 1"
-        /></a>
+        <a href="product-add"><img src="/img/plus-icon.png" alt="Icon 1" /></a>
         <a href="cart"
           ><img src="/img/ic-shopping-cart-24px-1@1x.png" alt="Icon 2"
         /></a>
@@ -91,9 +89,7 @@
                   id="production-year"
                   name="production-year"
                 >
-                  <option value="" selected>
-                    Wybierz rok produkcji
-                  </option>
+                  <option value="" selected>Wybierz rok produkcji</option>
                 </select>
               </div>
             </div>
@@ -208,48 +204,55 @@
         // After updating models, also update generations
         updateGenerations();
       }
-  </script>
-  <script th:inline="javascript">
-    
-    window.onload = function() {
+    </script>
+    <script th:inline="javascript">
+      window.onload = function () {
         populateProductionYears();
-    }
+      };
 
-    function searchCars() {
-      // Get selected filters
-      var selectedBrand = document.getElementById('brand').value;
-      var selectedModel = document.getElementById('model').value;
-      var selectedYear = document.getElementById('year').value;
-      var selectedProductionYear = document.getElementById('production-year').value;
-  
-      // Construct query string
-      var queryString = '';
-      if (selectedBrand) queryString += 'brand=' + encodeURIComponent(selectedBrand) + '&';
-      if (selectedModel) queryString += 'model=' + encodeURIComponent(selectedModel) + '&';
-      if (selectedYear) queryString += 'generation=' + encodeURIComponent(selectedYear) + '&';
-      if (selectedProductionYear) queryString += 'productionYear=' + encodeURIComponent(selectedProductionYear) + '&';
-  
-      // Remove trailing '&' if present
-      queryString = queryString.replace(/&$/, '');
-  
-      // Redirect to the second page with the query string
-      window.location.href = '/parts-filter?' + queryString;
-    }
-  
-    function populateProductionYears() {
+      function searchCars() {
+        // Get selected filters
+        var selectedBrand = document.getElementById("brand").value;
+        var selectedModel = document.getElementById("model").value;
+        var selectedYear = document.getElementById("year").value;
+        var selectedProductionYear =
+          document.getElementById("production-year").value;
+
+        // Construct query string
+        var queryString = "";
+        if (selectedBrand)
+          queryString += "brand=" + encodeURIComponent(selectedBrand) + "&";
+        if (selectedModel)
+          queryString += "model=" + encodeURIComponent(selectedModel) + "&";
+        if (selectedYear)
+          queryString += "generation=" + encodeURIComponent(selectedYear) + "&";
+        if (selectedProductionYear)
+          queryString +=
+            "productionYear=" +
+            encodeURIComponent(selectedProductionYear) +
+            "&";
+
+        // Remove trailing '&' if present
+        queryString = queryString.replace(/&$/, "");
+
+        // Redirect to the second page with the query string
+        window.location.href = "/parts-filter?" + queryString;
+      }
+
+      function populateProductionYears() {
         var currentYear = new Date().getFullYear();
-        var productionYearDropdown = document.getElementById('production-year');
-        
-        productionYearDropdown.innerHTML = '<option value="" selected>Wybierz rok produkcji</option>';
-        
-        for (var year = currentYear; year >= 1990; year--) {
-            var option = document.createElement('option');
-            option.value = year;
-            option.text = year;
-            productionYearDropdown.add(option);
-        }
-    }
+        var productionYearDropdown = document.getElementById("production-year");
 
+        productionYearDropdown.innerHTML =
+          '<option value="" selected>Wybierz rok produkcji</option>';
+
+        for (var year = currentYear; year >= 1990; year--) {
+          var option = document.createElement("option");
+          option.value = year;
+          option.text = year;
+          productionYearDropdown.add(option);
+        }
+      }
     </script>
     <script>
       // Definiujemy Konami Code
@@ -265,13 +268,13 @@
         "b",
         "a",
       ];
-  
+
       let userInput = [];
-  
+
       // Nasłuchiwanie na zdarzenia klawiatury
       window.addEventListener("keydown", (e) => {
         userInput.push(e.key);
-  
+
         // Sprawdzamy, czy wprowadzono pełny Konami Code
         if (
           userInput.length === konamiCode.length &&
@@ -282,6 +285,13 @@
         }
       });
     </script>
-      <script src="/js/darkmode.js"></script>
+    <script src="/js/darkmode.js"></script>
+    <script>
+      function loadNewContent() {
+        // Przekierowanie do innego pliku HTML
+        window.location.href = "index_eng";
+      }
+    </script>
+    <button onclick="loadNewContent()">Załaduj inny plik HTML</button>
   </body>
 </html>
