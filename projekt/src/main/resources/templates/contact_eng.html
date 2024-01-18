@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/ccc/style7.css" />
+    <title>Contact</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <button id="toggleModeButton">Change theme</button>
+      <div class="icons">
+        <a href="product-add"
+          ><img src="/mvnw.cmd" alt="Icon 1"
+        /></a>
+        <a href="index"
+          ><img src="/img/ic-search-24px-1@1x.png" alt="Icon 1"
+        /></a>
+        <a href="cart"
+          ><img src="/img/ic-shopping-cart-24px-1@1x.png" alt="Icon 2"
+        /></a>
+        <a href="profile"
+          ><img src="/img/ic-perm-identity-24px-1@1x.png" alt="Icon 3"
+        /></a>
+      </div>
+    </nav>
+
+    <main>
+     <div class="content-container">
+      <div class="contact-info">
+        <h1>Contact us!</h1>
+        <section>
+        <h2>Company address</h2>
+        <p>ul. Example 123</p>
+        <p>12-345 Example City</p>
+        <p>Polska</p>
+      </section>
+      <section>
+        <h2>Phone number</h2>
+        <p>+48 123 456 789</p>
+      </section>
+      <section>
+        <h2>Adres e-mail</h2>
+        <p>contact@example.com</p>
+      </section>
+      <section>
+      </div>
+
+      <div class="contact-form">
+        <h1>Contact form</h1>
+        <form action="send-email.php" method="post">
+        <label for="name">Name and surname:</label>
+        <input type="text" id="name" name="name" required />
+        <label for="email">E-mail address:</label>
+        <input type="email" id="email" name="email" required />
+        <label for="message">Message:</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          cols="30"
+          required
+        ></textarea>
+        <div class="send">
+          <button class="submit">Send message</button>
+        </div>
+        
+      </form>
+      </div>
+     </div>
+      
+        
+      </section>
+    </main>
+    <footer>
+      <p>&copy; TurboBay. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+  </body>
+</html>
