@@ -40,6 +40,7 @@
             action="/process-product-add"
             method="post"
             enctype="multipart/form-data"
+            onsubmit="return validateForm()"
           >
             <label for="title">Nazwa ogłoszenia:</label>
             <input type="text" id="title" name="title" required />
@@ -194,6 +195,22 @@
           window.location.href = "product-add_eng";
         }
       </script>
+
+      <script th:inline="javascript">
+        function validateForm() {
+            var brand = document.getElementById("brand").value;
+            var model = document.getElementById("model").value;
+            var year = document.getElementById("year").value;
+
+            if (brand === "" || model === "" || year === "") {
+                alert("Proszę wypełnić wszystkie wymagane pola: Marka, Model, Rok");
+                return false; // Przerwij przesyłanie formularza
+            }
+
+            return true; // Prześlij formularz, jeśli wszystko jest w porządku
+        }
+      </script>
+
     </main>
 
     <footer>

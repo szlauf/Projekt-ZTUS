@@ -81,8 +81,16 @@
       <div class="sellers-opinion"><span th:text="${ocena}+'/5'"></span></div>
       <div class="cnt-button-container">
         <button class="contact-button">Napisz Wiadomość</button>
-        <button class="contact-button2">Zadzwoń</button>
-        <button class="contact-button3">Dodaj do koszyka</button>
+        <button class="contact-button2" onclick="togglePhoneNumber()">Zadzwoń</button>
+        <p><span id="phoneNumber" th:text="${daneUser.nrTelefonu}" style="display: none;"></span></p>
+        <form th:action="@{/add-to-cart}" method="post" class="cnt-button-container">
+          <input
+            type="hidden"
+            name="partId"
+            th:value="${part.id}"
+          />
+          <button class="contact-button3">Dodaj do koszyka</button>
+        </form>
       </div>
       <div id="map"></div>
     </div>
@@ -100,9 +108,27 @@
     }).addTo(map);
   </script>
   <script>
+
+    function getQueryStringParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    const id = getQueryStringParameter("id");
+
+
     function loadNewContent() {
       // Przekierowanie do innego pliku HTML
-      window.location.href = "product-page_eng";
+      window.location.href = "product-page_eng?id="+id;
+    }
+
+    let phoneNumberVisible = false;
+
+
+    function togglePhoneNumber() {
+      const phoneNumberElement = document.getElementById('phoneNumber');
+      phoneNumberVisible = !phoneNumberVisible;
+      phoneNumberElement.style.display = phoneNumberVisible ? 'block' : 'none';
     }
   </script>
 </html>

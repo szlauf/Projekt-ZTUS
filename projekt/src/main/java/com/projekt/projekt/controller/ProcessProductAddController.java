@@ -16,12 +16,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@RequestMapping("/process-product-add")
 public class ProcessProductAddController {
 
     @Autowired 
@@ -36,7 +34,7 @@ public class ProcessProductAddController {
     @Autowired
     ModelRepository modelRepository;
 
-    @PostMapping
+    @PostMapping("/process-product-add")
     public String processProductAdd(
             @RequestParam("title") String title,
             @RequestParam("image") MultipartFile image,
@@ -72,5 +70,43 @@ public class ProcessProductAddController {
         
 
         return "redirect:/product-page?id=" + newPart.getId();
+    }
+
+    @PostMapping("/process-product-add-eng")
+    public String processProductAddEng(
+            @RequestParam("title") String title,
+            @RequestParam("image") MultipartFile image,
+            @RequestParam("description") String description,
+            @RequestParam("brand") String brand,
+            @RequestParam("model") String smodel,
+            @RequestParam("year") String generation,
+            @RequestParam("production-year") Integer productionYear,
+            @RequestParam("price") Integer price
+
+    ) {
+        Part newPart = new Part();
+        newPart.setTitle(title);
+        newPart.setDescription(description);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userRepository.findByLogin(username);
+        newPart.setUser(user);
+        newPart.setCarProductionYear(productionYear);
+        newPart.setPrice(price);
+        Model model = modelRepository.findByNazwaModeluAndGeneracja(smodel, generation);
+        newPart.setModel(model);
+        newPart.setIsArchived(false);
+        Zdjecie zdjecie = new Zdjecie();
+        try {
+            zdjecie.setZdjecie(image.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        zdjecie.setPart(newPart);
+        partsRepository.save(newPart);
+        zdjecieRepository.save(zdjecie);
+        
+
+        return "redirect:/product-page_eng?id=" + newPart.getId();
     }
 }

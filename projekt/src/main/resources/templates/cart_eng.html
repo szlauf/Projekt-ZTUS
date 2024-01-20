@@ -25,14 +25,14 @@
       </button>
       <button id="toggleModeButton">Change Theme</button>
       <div class="icons">
-        <a href="product-add"><img src="/img/plus-icon.png" alt="Icon 1" /></a>
-        <a href="index"
+        <a href="product-add_eng"><img src="/img/plus-icon.png" alt="Icon 1" /></a>
+        <a href="index_eng"
           ><img src="/img/ic-search-24px-1@1x.png" alt="Icon 1"
         /></a>
-        <a href="cart"
+        <a href="cart_eng"
           ><img src="/img/ic-shopping-cart-24px-1@1x.png" alt="Icon 2"
         /></a>
-        <a href="profile"
+        <a href="profile_eng"
           ><img src="/img/ic-perm-identity-24px-1@1x.png" alt="Icon 3"
         /></a>
       </div>
@@ -51,16 +51,16 @@
             </thead>
             <tbody id="table-body">
               <!-- Thymeleaf each loop to iterate over the parts -->
-              <tr th:each="part : ${parts}">
-                <td>
-                  <img
-                    th:src="'data:image/png;base64,' + ${part.firstImageBase64}"
-                    alt="Part Image"
-                  />
-                </td>
-                <td th:text="${part.title}"></td>
-                <td th:text="${part.price}"></td>
-              </tr>
+              <form action="/placeOrder" method="post">
+                <!-- Thymeleaf each loop to iterate over the parts -->
+                <tr th:each="part : ${parts}">
+                    <td>
+                        <img th:src="'data:image/png;base64,' + ${part.firstImageBase64}" alt="Part Image" />
+                    </td>
+                    <td th:text="${part.title}"></td>
+                    <td th:text="${part.price}"></td>
+                </tr>
+            </form>
             </tbody>
           </table>
         </div>
@@ -69,7 +69,7 @@
         <h2>Summary</h2>
         <p>Total: <span th:text="${price}"></span></p>
         <p>Shipping: $10</p>
-        <a href="#" class="order-button">Place Order</a>
+        <button type="submit" class="order-button">Złóż zamówienie</button>
       </div>
     </div>
     <script src="/js/darkmode.js"></script>
@@ -78,6 +78,51 @@
         // Przekierowanie do innego pliku HTML
         window.location.href = "cart";
       }
+
+      document.addEventListener("DOMContentLoaded", function () {
+          document.querySelector(".order-button").addEventListener("click", function () {
+              // Find the form element
+              var form = document.querySelector("form");
+  
+              // Fetch data from the server using the form's action and method
+              fetch(form.action, {
+                  method: form.method,
+                  headers: {
+                      'Content-Type': 'application/x-www-form-urlencoded',
+                  },
+                  body: new URLSearchParams(new FormData(form)),
+              })
+              .then(response => {
+                  if (!response.ok) {
+                      return response.json().then(data => {
+                          // Display an alert if the cart is empty
+                          alert(data.message);
+                          throw new Error(data.message);
+                      });
+                  }
+                  return response.blob();
+              })
+              .then(blob => {
+                  // Check if the blob is a PDF (you may need to adjust this check based on your server response)
+                  if (blob.type === 'application/pdf') {
+                      // Create a Blob URL for the PDF and open it in a new tab
+                      var pdfUrl = URL.createObjectURL(blob);
+                      window.open(pdfUrl, '_blank');
+  
+                      // Refresh the page after ordering
+                      window.location.reload();
+                  } else {
+                      // Handle other successful responses as needed
+                      console.log('Successfully placed order');
+                  }
+              })
+              .catch(error => {
+                  // Handle any other errors
+                  console.error(error);
+              });
+          });
+      });
+
     </script>
   </body>
 </html>

@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 
 @Entity
 public class User {
@@ -21,6 +22,9 @@ public class User {
     // Konstruktor domyślny, wymagany przez JPA
     @Column(name = "dane_user_id")
     private Integer daneUserId;
+
+    @Transient
+    private Double averageRating;
 
     // Konstruktor domyślny, wymagany przez JPA
     public User() {
@@ -61,6 +65,12 @@ public class User {
     // Metoda ustawiająca id danych użytkownika
     public void setDaneUserId(Integer daneUserId) {
         this.daneUserId = daneUserId;
+    }
+    public Double getAverageRating() {
+        return averageRating;
+    }
+    public void setAverageRating(Double averageRating) {
+        this.averageRating = averageRating;
     }
     
 }

@@ -40,7 +40,7 @@ public class PartsService {
      * return Lista obiektów Part reprezentujących części spełniające podane kryteria.
      */
 
-     public List<Part> getFilteredParts(String brand, String model, String generation, Integer productionYear) {
+    public List<Part> getFilteredParts(String brand, String model, String generation, Integer productionYear) {
         if ((brand == null || brand.isEmpty()) && (model == null || model.isEmpty()) &&
             (generation == null || generation.isEmpty()) && productionYear == null) {
             // If all parameters are null or empty, return all non-archived parts
@@ -51,7 +51,20 @@ public class PartsService {
         Specification<Part> specification = (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
     
-            // ... existing code ...
+            if (brand != null && !brand.isEmpty()) {
+                // Add brand filtering
+                predicates.add(criteriaBuilder.equal(root.get("model").get("marka").get("nazwaMarki"), brand));
+            }
+    
+            if (model != null && !model.isEmpty()) {
+                // Add model filtering
+                predicates.add(criteriaBuilder.equal(root.get("model").get("nazwaModelu"), model));
+            }
+    
+            if (generation != null && !generation.isEmpty()) {
+                // Add generation filtering
+                predicates.add(criteriaBuilder.equal(root.get("model").get("generacja"), generation));
+            }
     
             if (productionYear != null) {
                 // Add production year filtering
@@ -68,9 +81,10 @@ public class PartsService {
         return partsRepository.findAll(specification);
     }
     
-
-    
-    
+    public void deleteParts(List<Long> partIds) {
+        // Implement logic to delete the parts by their IDs
+        partsRepository.deleteAllById(partIds);    
+    }
 
     public List<Part> getUserParts(User user){
         return partsRepository.findByUserAndIsArchived(user, false);

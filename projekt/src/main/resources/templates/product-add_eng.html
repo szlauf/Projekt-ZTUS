@@ -19,14 +19,14 @@
       </button>
       <button id="toggleModeButton">Change Theme</button>
       <div class="icons">
-        <a href="product-add"><img src="/img/plus-icon.png" alt="Icon 1" /></a>
-        <a href="index"
+        <a href="product-add_eng"><img src="/img/plus-icon.png" alt="Icon 1" /></a>
+        <a href="index_eng"
           ><img src="/img/ic-search-24px-1@1x.png" alt="Icon 1"
         /></a>
-        <a href="cart"
+        <a href="cart_eng"
           ><img src="/img/ic-shopping-cart-24px-1@1x.png" alt="Icon 2"
         /></a>
-        <a href="profile"
+        <a href="profile_eng"
           ><img src="/img/ic-perm-identity-24px-1@1x.png" alt="Icon 3"
         /></a>
       </div>
@@ -37,7 +37,7 @@
         <div class="adding">
           <h1>Add offer - Car parts</h1>
           <form
-            action="/process-product-add"
+            action="/process-product-add-eng"
             method="post"
             enctype="multipart/form-data"
           >
@@ -108,14 +108,8 @@
               <div class="label-and-select">
                 <label for="production-year">Production year:</label>
                 <div class="select-container">
-                  <select
-                    class="custom-select"
-                    id="production-year"
-                    name="production-year"
-                  >
-                    <option value="" disabled selected>
-                      Select production year
-                    </option>
+                  <select class="custom-select" id="production-year" name="production-year">
+                    <option value="" disabled selected>Select production year</option>
                   </select>
                 </div>
               </div>
@@ -132,7 +126,7 @@
   
           var generationDropdown = document.getElementById("year");
           generationDropdown.innerHTML =
-            '<option value="" disabled selected>Generacja</option>';
+            '<option value="" disabled selected>Select generation</option>';
   
           for (var i = 0; i < generations.length; i++) {
             if (generations[i].nazwaModelu === selectedModel) {
@@ -150,7 +144,7 @@
   
           var modelDropdown = document.getElementById("model");
           modelDropdown.innerHTML =
-            '<option value="" disabled selected>Wybierz model</option>';
+            '<option value="" disabled selected>Select model</option>';
   
           for (var i = 0; i < models.length; i++) {
             if (models[i].marka.nazwaMarki === selectedBrand) {
@@ -175,7 +169,7 @@
           var currentYear = new Date().getFullYear();
           var productionYearDropdown = document.getElementById('production-year');
           
-          productionYearDropdown.innerHTML = '<option value="" disabled selected>Wybierz rok produkcji</option>';
+          productionYearDropdown.innerHTML = '<option value="" disabled selected>Select production year</option>';
           
           for (var year = currentYear; year >= 1990; year--) {
               var option = document.createElement('option');

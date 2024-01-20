@@ -19,11 +19,11 @@
       </button>
       <button id="toggleModeButton">Change theme</button>
       <div class="icons">
-        <a href="product-add"><img src="/img/plus-icon.png" alt="Icon 1" /></a>
-        <a href="cart"
+        <a href="product-add_eng"><img src="/img/plus-icon.png" alt="Icon 1" /></a>
+        <a href="cart_eng"
           ><img src="/img/ic-shopping-cart-24px-1@1x.png" alt="Icon 2"
         /></a>
-        <a href="profile"
+        <a href="profile_eng"
           ><img src="/img/ic-perm-identity-24px-1@1x.png" alt="Icon 3"
         /></a>
       </div>
@@ -162,7 +162,7 @@
 
         var generationDropdown = document.getElementById("year");
         generationDropdown.innerHTML =
-          '<option value="" selected>Generacja</option>';
+          '<option value="" selected>Selecet generation</option>';
 
         for (var i = 0; i < generations.length; i++) {
           if (generations[i].nazwaModelu === selectedModel) {
@@ -180,7 +180,7 @@
 
         var modelDropdown = document.getElementById("model");
         modelDropdown.innerHTML =
-          '<option value="" selected>Wybierz model</option>';
+          '<option value="" selected>Select model</option>';
 
         for (var i = 0; i < models.length; i++) {
           if (models[i].marka.nazwaMarki === selectedBrand) {
@@ -203,7 +203,7 @@
         const productionYear = document.getElementById("production-year").value;
 
         // Construct the new URL with filter parameters
-        const newUrl = `/parts-filter?brand=${brand}&model=${model}&generation=${generation}&productionYear=${productionYear}`;
+        const newUrl = `/parts-filter_eng?brand=${brand}&model=${model}&generation=${generation}&productionYear=${productionYear}`;
 
         // Redirect to the new URL
         window.location.href = newUrl;
@@ -213,7 +213,7 @@
         var productionYearDropdown = document.getElementById("production-year");
 
         productionYearDropdown.innerHTML =
-          '<option value="">Rok produkcji</option>';
+          '<option value="" selected>Select productin year</option>';
 
         for (var year = currentYear; year >= 1990; year--) {
           var option = document.createElement("option");
@@ -236,7 +236,7 @@
             var partId = row.getAttribute("data-part-id");
 
             // Redirect to the product-page with the part id
-            window.location.href = "/product-page?id=" + partId;
+            window.location.href = "/product-page_eng?id=" + partId;
           });
         });
       });

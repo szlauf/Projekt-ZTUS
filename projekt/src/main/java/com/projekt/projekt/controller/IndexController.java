@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.projekt.projekt.model.Marka;
 import com.projekt.projekt.model.Model;
+import com.projekt.projekt.model.User;
 import com.projekt.projekt.repository.MarkaRepository;
 import com.projekt.projekt.repository.ModelRepository;
+import com.projekt.projekt.service.UserService;
 
 // Oznaczenie klasy jako kontrolera Spring
 @Controller
@@ -25,6 +27,9 @@ public class IndexController {
     @Autowired
     private ModelRepository modelRepository;
 
+    @Autowired
+    private UserService userService;
+
     // Mapowanie ścieżki "/index" na metodę obsługującą żądanie GET
     @GetMapping("/index")
     public String index(ModelMap model) {
@@ -33,6 +38,9 @@ public class IndexController {
         
         // Pobranie wszystkich obiektów Model z repozytorium
         List<Model> models = modelRepository.findAll();
+
+        List<User> users = userService.getUsersWithHighestAverageRating(5); // 5 - liczba użytkowników do wyświetlenia
+        model.addAttribute("users", users);
 
         // Dodanie obiektów Marka i Model do modelu, który zostanie przekazany do widoku
         model.addAttribute("marki", marki);

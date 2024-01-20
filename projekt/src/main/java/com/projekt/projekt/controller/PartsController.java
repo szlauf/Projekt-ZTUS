@@ -29,12 +29,16 @@ public class PartsController {
     @Autowired
     private ModelRepository modelRepository;
 
-    /*
-    // Komentarz: Obsługuje żądanie GET na endpoint "/czesci".
-    // Pobiera wszystkie części, marki i modele, a następnie przetwarza zdjęcia na base64.
-    @GetMapping("/czesci")
-    public String czesci(ModelMap model) {
-        List<Part> parts = partsService.getAllParts();
+    // Obsługuje żądanie GET na endpoint "/parts-filter" z parametrami.
+    // Pobiera i filtruje części na podstawie przekazanych parametrów, a następnie przetwarza zdjęcia na base64.
+    @GetMapping("/parts-filter")
+        public String czesci(@RequestParam(name = "brand", required = false) String brand,
+                            @RequestParam(name = "model", required = false) String smodel,
+                            @RequestParam(name = "generation", required = false) String generation,
+                            @RequestParam(name = "productionYear", required = false) Integer productionYear,
+                            ModelMap model) {
+
+        List<Part> parts = partsService.getFilteredParts(brand, smodel, generation, productionYear);
         List<Marka> marki = markaRepository.findAll();
         List<Model> models = modelRepository.findAll();
         model.addAttribute("marki", marki);
@@ -49,61 +53,33 @@ public class PartsController {
         });
 
         model.addAttribute("parts", parts);
-        return "czesci";
+        return "parts-filter";
     }
-    */
 
-    // Komentarz: Obsługuje żądanie GET na endpoint "/parts-filter" z parametrami.
-    // Pobiera i filtruje części na podstawie przekazanych parametrów, a następnie przetwarza zdjęcia na base64.
-    @GetMapping("/parts-filter")
-    public String czesci(@RequestParam(name = "brand", required = false) String brand,
-                        @RequestParam(name = "model", required = false) String smodel,
-                        @RequestParam(name = "generation", required = false) String generation,
-                        @RequestParam(name = "productionYear", required = false) Integer productionYear,
-                        ModelMap model) {
+    @GetMapping("/parts-filter_eng")
+        public String czesciEng(@RequestParam(name = "brand", required = false) String brand,
+                            @RequestParam(name = "model", required = false) String smodel,
+                            @RequestParam(name = "generation", required = false) String generation,
+                            @RequestParam(name = "productionYear", required = false) Integer productionYear,
+                            ModelMap model) {
 
-    List<Part> parts = partsService.getFilteredParts(brand, smodel, generation, productionYear);
-    List<Marka> marki = markaRepository.findAll();
-    List<Model> models = modelRepository.findAll();
-    model.addAttribute("marki", marki);
-    model.addAttribute("models", models);
+        List<Part> parts = partsService.getFilteredParts(brand, smodel, generation, productionYear);
+        List<Marka> marki = markaRepository.findAll();
+        List<Model> models = modelRepository.findAll();
+        model.addAttribute("marki", marki);
+        model.addAttribute("models", models);
 
-    // Populate images and base64 for the first image
-    parts.forEach(part -> {
-        List<Zdjecie> zdjecia = part.getZdjecia();
-        if (zdjecia != null && !zdjecia.isEmpty()) {
-            part.setBase64Image(ImageUtils.encodeByteArrayToBase64(zdjecia.get(0).getZdjecie()));
-        }
-    });
+        // Populate images and base64 for the first image
+        parts.forEach(part -> {
+            List<Zdjecie> zdjecia = part.getZdjecia();
+            if (zdjecia != null && !zdjecia.isEmpty()) {
+                part.setBase64Image(ImageUtils.encodeByteArrayToBase64(zdjecia.get(0).getZdjecie()));
+            }
+        });
 
-    model.addAttribute("parts", parts);
-    return "parts-filter";
-}
-
-@GetMapping("/parts-filter_eng")
-    public String czesciEng(@RequestParam(name = "brand", required = false) String brand,
-                        @RequestParam(name = "model", required = false) String smodel,
-                        @RequestParam(name = "generation", required = false) String generation,
-                        @RequestParam(name = "productionYear", required = false) Integer productionYear,
-                        ModelMap model) {
-
-    List<Part> parts = partsService.getFilteredParts(brand, smodel, generation, productionYear);
-    List<Marka> marki = markaRepository.findAll();
-    List<Model> models = modelRepository.findAll();
-    model.addAttribute("marki", marki);
-    model.addAttribute("models", models);
-
-    // Populate images and base64 for the first image
-    parts.forEach(part -> {
-        List<Zdjecie> zdjecia = part.getZdjecia();
-        if (zdjecia != null && !zdjecia.isEmpty()) {
-            part.setBase64Image(ImageUtils.encodeByteArrayToBase64(zdjecia.get(0).getZdjecie()));
-        }
-    });
-
-    model.addAttribute("parts", parts);
-    return "parts-filter_eng";
-}
+        model.addAttribute("parts", parts);
+        return "parts-filter_eng";
+    }
  
     
 }

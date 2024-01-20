@@ -37,14 +37,14 @@
       </button>
       <button id="toggleModeButton">Change Theme</button>
       <div class="icons">
-        <a href="product-add"><img src="/img/plus-icon.png" alt="Icon 1" /></a>
-        <a href="index"
+        <a href="product-add_eng"><img src="/img/plus-icon.png" alt="Icon 1" /></a>
+        <a href="index_eng"
           ><img src="/img/ic-search-24px-1@1x.png" alt="Icon 1"
         /></a>
-        <a href="cart"
+        <a href="cart_eng"
           ><img src="/img/ic-shopping-cart-24px-1@1x.png" alt="Icon 2"
         /></a>
-        <a href="profile"
+        <a href="profile_eng"
           ><img src="/img/ic-perm-identity-24px-1@1x.png" alt="Icon 3"
         /></a>
       </div>
@@ -53,7 +53,11 @@
     <div class="pcontainer">
       <div class="image-container">
         <div class="product-image">
-          <img src="/img/Qiyana.png" alt="" width="100%" height="100%" />
+          <img
+            class="product-image"
+            th:src="'data:image/png;base64,' + ${part.firstImageBase64}"
+            alt="Part Image"
+          />
         </div>
       </div>
       <div class="product-container">
@@ -77,8 +81,16 @@
       <div class="sellers-opinion"><span th:text="${ocena}+'/5'"></span></div>
       <div class="cnt-button-container">
         <button class="contact-button">Write a Message</button>
-        <button class="contact-button2">Call</button>
-        <button class="contact-button3">Add to Cart</button>
+        <button class="contact-button2" onclick="togglePhoneNumber()">Call</button>
+        <p><span id="phoneNumber" th:text="${daneUser.nrTelefonu}" style="display: none;"></span></p>
+        <form th:action="@{/add-to-cart-eng}" method="post" class="cnt-button-container">
+          <input
+            type="hidden"
+            name="partId"
+            th:value="${part.id}"
+          />
+          <button class="contact-button3">Add to Cart</button>
+        </form>
       </div>
       <div id="map"></div>
     </div>
@@ -93,11 +105,28 @@
       attribution:
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }).addTo(map);
+
+    let phoneNumberVisible = false;
+
+
+    function togglePhoneNumber() {
+      const phoneNumberElement = document.getElementById('phoneNumber');
+      phoneNumberVisible = !phoneNumberVisible;
+      phoneNumberElement.style.display = phoneNumberVisible ? 'block' : 'none';
+    }
   </script>
   <script>
+        function getQueryStringParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    const id = getQueryStringParameter("id");
+
+
     function loadNewContent() {
       // Przekierowanie do innego pliku HTML
-      window.location.href = "product-page";
+      window.location.href = "product-page?id="+id;
     }
   </script>
 </html>

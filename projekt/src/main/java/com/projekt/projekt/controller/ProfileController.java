@@ -4,14 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -108,6 +105,30 @@ public class ProfileController {
       partsService.unArchivePart(partId);
       // Redirect to the profile page or wherever appropriate
       return "redirect:/profile";
+   }
+
+   @PostMapping("/deletePart-eng")
+    public String deletePartEng(@RequestParam("partId") Long partId) {
+        // Call service method to delete the part
+        partsService.deletePart(partId);
+        // Redirect to the profile page or wherever appropriate
+        return "redirect:/profile_eng";
+    }
+
+   @PostMapping("/archivePart-eng")
+   public String archivePartEng(@RequestParam("partId") Long partId) {
+      // Call service method to archive the part
+      partsService.archivePart(partId);
+      // Redirect to the profile page or wherever appropriate
+      return "redirect:/profile_eng";
+   }
+
+   @PostMapping("/unArchivePart-eng")
+   public String unArchivePartEng(@RequestParam("partId") Long partId) {
+      // Call service method to archive the part
+      partsService.unArchivePart(partId);
+      // Redirect to the profile page or wherever appropriate
+      return "redirect:/profile_eng";
    }
 
 }

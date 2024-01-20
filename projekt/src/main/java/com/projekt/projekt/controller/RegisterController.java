@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.projekt.projekt.model.Cart;
 import com.projekt.projekt.model.DaneUser;
 import com.projekt.projekt.model.User;
+import com.projekt.projekt.repository.CartRepository;
 import com.projekt.projekt.repository.DaneUserRepository;
 import com.projekt.projekt.repository.UserRepository;
 
@@ -22,6 +24,9 @@ public class RegisterController {
 
     @Autowired
     DaneUserRepository daneUserRepository;
+
+    @Autowired
+    CartRepository cartRepository;
 
     // Obsługuje żądania GET na "/registration" i zwraca szablon "registration"
     @GetMapping("/registration")
@@ -39,7 +44,6 @@ public class RegisterController {
             return "registration"; // Powrót do strony rejestracji z komunikatem błędu
         }
 
-        System.out.print(password+login);
         // Szyfruje hasło przy użyciu BCryptPasswordEncoder
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         User user = new User(login, passwordEncoder.encode(password));
@@ -57,6 +61,11 @@ public class RegisterController {
         // Zapisuje DaneUsera do DaneUserRepository
         daneUserRepository.save(daneUser);
 
+        Cart cart = new Cart();
+        cart.setIdUser(user.getId());
+        cart.setIdProdukty(user.getId());
+        cartRepository.save(cart);
+
         // Przekierowuje do strony logowania po pomyślnej rejestracji
         return "login";
         
@@ -64,7 +73,7 @@ public class RegisterController {
 
     @GetMapping("/registration_eng")
     public String registrationEng() {
-        return "registration";
+        return "registration_eng";
     }
 
     // Obsługuje żądania POST na "/registration" dotyczące rejestracji użytkownika
@@ -77,7 +86,6 @@ public class RegisterController {
             return "registration"; // Powrót do strony rejestracji z komunikatem błędu
         }
 
-        System.out.print(password+login);
         // Szyfruje hasło przy użyciu BCryptPasswordEncoder
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         User user = new User(login, passwordEncoder.encode(password));
@@ -94,6 +102,11 @@ public class RegisterController {
         
         // Zapisuje DaneUsera do DaneUserRepository
         daneUserRepository.save(daneUser);
+
+        Cart cart = new Cart();
+        cart.setIdUser(user.getId());
+        cart.setIdProdukty(user.getId());
+        cartRepository.save(cart);
 
         // Przekierowuje do strony logowania po pomyślnej rejestracji
         return "login_eng";

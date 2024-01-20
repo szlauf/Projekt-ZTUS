@@ -45,10 +45,15 @@ public class ProductAddControler {
     }
 
     @GetMapping("/product-add_eng")
-    public String productAddEng() {
-        // Zwraca nazwę widoku "product-add". 
-        // W praktyce oznacza to, że po odwołaniu się do ścieżki "/product-add", 
-        // zostanie wyrenderowany szablon o nazwie "product-add".
+    public String productAddEng(ModelMap model) {
+        List<Marka> marki = markaRepository.findAll();
+        
+        // Pobranie wszystkich obiektów Model z repozytorium
+        List<Model> models = modelRepository.findAll();
+
+        // Dodanie obiektów Marka i Model do modelu, który zostanie przekazany do widoku
+        model.addAttribute("marki", marki);
+        model.addAttribute("models", models);
         return "product-add_eng";
     }
     

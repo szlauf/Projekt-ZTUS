@@ -23,14 +23,14 @@
       </button>
       <button id="toggleModeButton">Change Theme</button>
       <div class="icons">
-        <a href="product-add"><img src="/img/plus-icon.png" alt="Icon 1" /></a>
-        <a href="index"
+        <a href="product-add_eng"><img src="/img/plus-icon.png" alt="Icon 1" /></a>
+        <a href="index_eng"
           ><img src="/img/ic-search-24px-1@1x.png" alt="Icon 1"
         /></a>
-        <a href="cart"
+        <a href="cart_eng"
           ><img src="/img/ic-shopping-cart-24px-1@1x.png" alt="Icon 2"
         /></a>
-        <a href="profile"
+        <a href="profile_eng"
           ><img src="/img/ic-perm-identity-24px-1@1x.png" alt="Icon 3"
         /></a>
       </div>
@@ -72,45 +72,29 @@
         <div class="section small-section">
           <h2>My Orders</h2>
           <div class="orders">
-            <table>
-              <tbody id="order">
-                <tr th:each="order : ${orders}">
-                  <td>
-                    <img
-                      th:src="'data:image/png;base64,' + ${order.firstImageBase64}"
-                      alt="Part Image"
-                    />
-                  </td>
-                  <td th:text="${order.title}"></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="section small-section">
-          <h2>My Offers</h2>
-          <div class="announcements">
             <div class="table-container">
               <table class="part-table">
-                <tbody id="announcements">
-                  <!-- Thymeleaf each loop to iterate over the parts -->
-                  <tr th:each="part : ${parts}">
+                <tbody id="order">
+                  <tr
+                    th:each="order : ${orders}"
+                    th:attr="data-part-id=${order.id}"
+                  >
                     <td>
                       <img
-                        th:src="'data:image/png;base64,' + ${part.firstImageBase64}"
+                        th:src="'data:image/png;base64,' + ${order.firstImageBase64}"
                         alt="Part Image"
                       />
                     </td>
-                    <td th:text="${part.title}"></td>
+                    <td th:text="${order.title}"></td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
+
         <div class="section small-section">
-          <h2>Archive</h2>
+          <h2>My Offers</h2>
           <div class="announcements">
             <div class="table-container">
               <table class="part-table">
@@ -128,7 +112,7 @@
                     </td>
                     <td th:text="${part.title}"></td>
                     <td>
-                      <form th:action="@{/deletePart}" method="post">
+                      <form th:action="@{/deletePart-eng}" method="post">
                         <input
                           type="hidden"
                           name="partId"
@@ -136,7 +120,49 @@
                         />
                         <button class="button" type="submit">Delete</button>
                       </form>
-                      <form th:action="@{/archivePart}" method="post">
+                      <form th:action="@{/archivePart-eng}" method="post">
+                        <input
+                          type="hidden"
+                          name="partId"
+                          th:value="${part.id}"
+                        />
+                        <button class="button" type="submit">Archive</button>
+                      </form>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="section small-section">
+          <h2>Archive</h2>
+          <div class="announcements">
+            <div class="table-container">
+              <table class="part-table">
+                <tbody id="announcements">
+                  <!-- Thymeleaf each loop to iterate over the parts -->
+                  <tr
+                    th:each="part : ${archive}"
+                    th:attr="data-part-id=${part.id}"
+                  >
+                    <td>
+                      <img
+                        th:src="'data:image/png;base64,' + ${part.firstImageBase64}"
+                        alt="Part Image"
+                      />
+                    </td>
+                    <td th:text="${part.title}"></td>
+                    <td>
+                      <form th:action="@{/deletePart-eng}" method="post">
+                        <input
+                          type="hidden"
+                          name="partId"
+                          th:value="${part.id}"
+                        />
+                        <button class="button" type="submit">Delete</button>
+                      </form>
+                      <form th:action="@{/unArchivePart-eng}" method="post">
                         <input
                           type="hidden"
                           name="partId"

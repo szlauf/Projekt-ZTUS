@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Add your CSS file if needed -->
+</head>
+<body>
+    <nav class="navbar">
+        <!-- Your navigation bar content -->
+    </nav>
+    <div class="confirmation-container">
+        <h1>Order Confirmation</h1>
+        <p th:text="${successMessage}"></p>
+        <p>Your order has been successfully placed. Below is the summary:</p>
+        <div class="order-details">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Part</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Thymeleaf each loop to iterate over the ordered parts -->
+                    <tr th:each="part : ${parts}">
+                        <td th:text="${part.title}"></td>
+                        <td th:text="${part.price}"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>Total Price: $<span th:text="${price}"></span></p>
+        </div>
+        <p>Thank you for your order!</p>
+    </div>
+</body>
+</html>

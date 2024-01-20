@@ -51,16 +51,16 @@
             </thead>
             <tbody id="table-body">
               <!-- Thymeleaf each loop to iterate over the parts -->
-              <tr th:each="part : ${parts}">
-                <td>
-                  <img
-                    th:src="'data:image/png;base64,' + ${part.firstImageBase64}"
-                    alt="Part Image"
-                  />
-                </td>
-                <td th:text="${part.title}"></td>
-                <td th:text="${part.price}"></td>
-              </tr>
+              <form action="/placeOrder" method="post">
+                <!-- Thymeleaf each loop to iterate over the parts -->
+                <tr th:each="part : ${parts}">
+                    <td>
+                        <img th:src="'data:image/png;base64,' + ${part.firstImageBase64}" alt="Part Image" />
+                    </td>
+                    <td th:text="${part.title}"></td>
+                    <td th:text="${part.price}"></td>
+                </tr>
+            </form>
             </tbody>
           </table>
         </div>
@@ -69,16 +69,64 @@
         <h2>Podsumowanie</h2>
         <p>Łącznie: <span th:text="${price}"></span></p>
         <p>Dostawa: $10</p>
-        <a href="#" class="order-button">Złóż zamówienie</a>
+        <button type="submit" class="order-button">Złóż zamówienie</button>
+
       </div>
     </div>
 
     <script src="/js/darkmode.js"></script>
     <script>
       function loadNewContent() {
-        // Przekierowanie do innego pliku HTML
-        window.location.href = "cart_eng";
+          // Przekierowanie do innego pliku HTML
+          window.location.href = "cart_eng";
       }
-    </script>
+  
+      document.addEventListener("DOMContentLoaded", function () {
+          document.querySelector(".order-button").addEventListener("click", function () {
+              // Find the form element
+              var form = document.querySelector("form");
+  
+              // Fetch data from the server using the form's action and method
+              fetch(form.action, {
+                  method: form.method,
+                  headers: {
+                      'Content-Type': 'application/x-www-form-urlencoded',
+                  },
+                  body: new URLSearchParams(new FormData(form)),
+              })
+              .then(response => {
+                  if (!response.ok) {
+                      return response.json().then(data => {
+                          // Display an alert if the cart is empty
+                          alert(data.message);
+                          throw new Error(data.message);
+                      });
+                  }
+                  return response.blob();
+              })
+              .then(blob => {
+                  // Check if the blob is a PDF (you may need to adjust this check based on your server response)
+                  if (blob.type === 'application/pdf') {
+                      // Create a Blob URL for the PDF and open it in a new tab
+                      var pdfUrl = URL.createObjectURL(blob);
+                      window.open(pdfUrl, '_blank');
+  
+                      // Refresh the page after ordering
+                      window.location.reload();
+                  } else {
+                      // Handle other successful responses as needed
+                      console.log('Successfully placed order');
+                  }
+              })
+              .catch(error => {
+                  // Handle any other errors
+                  console.error(error);
+              });
+          });
+      });
+  </script>
+  
+  
+  
   </body>
 </html>
