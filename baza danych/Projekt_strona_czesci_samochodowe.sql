@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 20, 2024 at 04:59 PM
+-- Generation Time: Jan 22, 2024 at 12:13 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -46,7 +46,9 @@ CREATE TABLE `dane_user` (
 INSERT INTO `dane_user` (`dane_user_id`, `imie`, `nazwisko`, `nr_telefonu`, `miasto`, `kod_pocztowy`, `ulica`, `nr_mieszkania`, `email`) VALUES
 (1, 'Jan', 'Maj', 123123123, 'miasto', '21-3769', 'asd', 'asd', 'asd@asd.asd'),
 (3, 'test', 'test', 123, 'test', 'tset', 'tse', '12', 'test@test.test'),
-(5, 'asdf', 'asdf', 123, 'asdf', 'asdf', 'asdf', 'asdf', 'asdasdasdas@dasd.dasdas');
+(5, 'asdf', 'asdf', 123, 'asdf', 'asdf', 'asdf', 'asdf', 'asdasdasdas@dasd.dasdas'),
+(6, 'Oskar', 'Laubsch', 1234567, 'zielona gora', '12-134', 'szafrana', '78', 'test@gmail.com'),
+(7, 'Oskar', 'Laubsch', 12345678, 'zielona gora ', '123-456', 'szafrana', '56', 'test@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -65,7 +67,9 @@ CREATE TABLE `koszyk` (
 
 INSERT INTO `koszyk` (`id_user`, `id_produkty`) VALUES
 (1, 1),
-(5, 5);
+(5, 5),
+(6, 6),
+(7, 7);
 
 -- --------------------------------------------------------
 
@@ -153,8 +157,8 @@ INSERT INTO `oceny` (`oceny_id`, `ocena`, `opis`, `id_user`) VALUES
 
 CREATE TABLE `ogloszenie` (
   `id` int(11) NOT NULL,
-  `tytul` varchar(255) DEFAULT NULL,
-  `opis` text DEFAULT NULL COMMENT 'opis ogloszenia',
+  `tytul` varchar(255) CHARACTER SET utf8 COLLATE utf8_polish_ci DEFAULT NULL,
+  `opis` text CHARACTER SET utf8 COLLATE utf8_polish_ci DEFAULT NULL COMMENT 'opis ogloszenia',
   `user_id` int(11) DEFAULT NULL,
   `id_modelu` int(11) DEFAULT NULL,
   `rok_produkcji_samochodu` int(11) DEFAULT NULL,
@@ -184,7 +188,9 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `login`, `haslo`, `dane_user_id`) VALUES
 (1, 'user1', '$2a$10$zP6OgLQehCwmpGyIKoA8aOF/FMHW5mvcG0UvMCaHk1RUmGsbV5q5G', 1),
 (3, 'test', '$2a$10$DDwtuZ.7mASqQ5JG/fU4XeL6UAIjaMbuNMqTCfNX7nI2hm/Dv2g7S', 3),
-(5, 'asdf', '$2a$10$MhTfVnhEC3X5tab9/wGvyeeTIt/u5rHp88pJBDxrHeEn24jSzsTTO', 5);
+(5, 'asdf', '$2a$10$MhTfVnhEC3X5tab9/wGvyeeTIt/u5rHp88pJBDxrHeEn24jSzsTTO', 5),
+(6, 'user10', '$2a$10$UCnZOM6ZapDThQFNYzkrgeK3z1.BFoHy4ixi38BQebf4n3Om57uPa', 6),
+(7, 'user420', '$2a$10$HfEC2CAZP5qovwDqzJK4Ye5f9KMZ9lPlXDBA5lyNMjIpjDhunG1fe', 7);
 
 -- --------------------------------------------------------
 
@@ -298,13 +304,13 @@ ALTER TABLE `oceny`
 -- AUTO_INCREMENT for table `ogloszenie`
 --
 ALTER TABLE `ogloszenie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user_orders`
@@ -316,7 +322,7 @@ ALTER TABLE `user_orders`
 -- AUTO_INCREMENT for table `zdjecie`
 --
 ALTER TABLE `zdjecie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- Constraints for dumped tables
